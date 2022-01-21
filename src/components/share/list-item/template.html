@@ -1,0 +1,7 @@
+<div>
+    <div class="container-search" v-if = "data.isSelected">
+        <div class="body-search" >
+          <li v-for="(item, index) in data.items" :key="index" @click="selectionItem(item)" :style="item.id == itemSelected.id ? 'color: #ffffff;background: #fdb432;' : 'color #000000'">{{item.name}} </li>
+        </div>
+      </div>
+</div>

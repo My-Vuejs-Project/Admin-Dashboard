@@ -1,0 +1,24 @@
+<div class="con-login">
+    <div class="box-form bg-white">
+        <div class="imgcontainer">
+            <img :src="require('@/assets/images/logo.png')" class="avatar">
+        </div>
+        <div class="container">
+            <div class="row mb12">
+                <label for="uname">Email</label>
+                <input v-model="body.email" type="text" class="input" />
+            </div>
+            <div class="row">
+                <label for="psw">Password</label>
+                <div style="display: flex;align-items: center;">
+                    <input v-model="body.password" :type="showPassword ? 'text' : 'password'" name="password" placeholder="Enter Password" class="input-info outline-success"
+                    required>
+                    <i class="fas fa-eye show-icon" v-if="showPassword" @click="showPassword = !showPassword"></i>
+                    <i class="fas fa-eye-slash show-icon" v-else @click="showPassword = !showPassword"></i>
+                </div>
+            </div>
+            <p v-if="!isLogin" @click="login" class="btn btn-primary mt12 mb30">Login</p>
+            <p v-else class="btn btn-primary mt12 mb30">Loading...</p>
+        </div>
+    </div>
+</div>

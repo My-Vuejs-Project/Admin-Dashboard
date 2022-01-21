@@ -1,0 +1,39 @@
+.border{
+border:1px solid var(--secondary);
+}
+.border-bottom{
+border-bottom:1px solid var(--secondary);
+}
+.border-top{
+border-top:1px solid var(--secondary);
+}
+.border-left{
+border-left:1px solid var(--secondary);
+}
+.border-right{
+border-right:1px solid var(--secondary);
+}
+.border-top-green{
+    border-top: 3px solid #13ce66;
+}
+.border-top-light-green {
+    border-top: 3px solid #0bd632;
+}
+.border-top-blue{
+    border-top: 3px solid #00c0ef;
+}
+.border-top-orange{
+    border-top: 3px solid #f39c12;
+}
+.border-top-red{
+    border-top: 3px solid #da0500;
+}
+.border-top-light-blue{
+    border-top:3px solid #3c8dbc
+}
+.border-top-gray {
+    border-top: 3px solid #bbb;
+}
+.border-top-pink {
+    border-top: 3px solid #ffd0d8;
+}

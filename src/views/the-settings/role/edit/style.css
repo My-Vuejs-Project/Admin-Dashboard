@@ -1,0 +1,176 @@
+::-webkit-input-placeholder {
+  /* Edge */
+  font-size: 12px;
+}
+
+:-ms-input-placeholder {
+  /* Internet Explorer */
+  font-size: 12px;
+}
+
+::placeholder {
+  font-size: 12px;
+}
+
+input {
+  outline-style: none;
+  border-style: none;
+}
+
+.txt-title {
+  text-align: end;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+  height: 30px;
+}
+
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+.text-right-reponse {
+  text-align: end;
+}
+
+.back {
+  position: absolute;
+  top: 24px;
+  left: 20px;
+  width: 30px;
+  height: 30px;
+}
+
+.txt-danger {
+  margin-right: 6px;
+}
+
+.label-selection {
+  display: block;
+  padding: 2px;
+  margin-bottom: 8px;
+}
+.select {
+  display: grid;
+  grid-template-columns: auto auto;
+  gap: 4px;
+  padding: 0;
+}
+.label-selection > label {
+  margin-left: 4px;
+  cursor: pointer;
+}
+input.checkbox{
+  width: auto;
+  margin-right: 8px;
+}
+.checkbox {
+  margin-top: 4px;
+}
+.selection-option {
+  display: flex;
+  margin-bottom: 5px;
+  margin-left: 8px;
+}
+
+.status {
+  display: grid;
+  gap: 4px;
+}
+
+.file-detail {
+  display: block;
+  align-self: center;
+}
+.p-file-name {
+  margin-bottom: 0px;
+  color: #fdb432;
+  font-size: 12px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 300px;
+}
+.container-wrap {
+  width: 75%;
+  margin: 0 auto;
+}
+.title {
+  margin-top: 20px;
+  font-weight: 600;
+  font-size: 18px;
+}
+.content {
+  margin: 10px 0;
+  border-top: 1px solid #fdb432;
+  border-bottom: 1px solid #fdb432;
+  padding: 50px 0;
+}
+.split {
+  display: grid;
+  grid-template-columns: 20% auto;
+  gap: 40px;
+  margin-bottom: 35px;
+}
+.input-container {
+  border: 1px solid #cccccc;
+  border-radius: 6px;
+  padding: 4px 6px;
+}
+
+.radio-item {
+  display: inline-block;
+  position: relative;
+}
+
+.radio-item input[type="radio"] {
+  display: none;
+}
+
+.radio-item label:before {
+  content: " ";
+  display: inline-block;
+  position: relative;
+  top: 2px;
+  margin: 0 5px 0 0;
+  width: 13px;
+  height: 13px;
+  border-radius: 11px;
+  border: 1px solid #fdb432;
+  background-color: transparent;
+}
+
+.radio-item input[type="radio"]:checked + label:after {
+  border-radius: 11px;
+  width: 7px;
+  height: 7px;
+  position: absolute;
+  top: 9px;
+  left: 3px;
+  content: " ";
+  display: block;
+  background: #fdb432;
+}
+
+@media screen and (max-width: 650px) {
+  .col-3,
+  .col-9 {
+    width: 100%;
+  }
+  .text-right-reponse {
+    text-align: start;
+  }
+
+  .input-name {
+    width: 100%;
+  }
+
+  .select {
+    display: block;
+  }
+}

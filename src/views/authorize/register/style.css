@@ -1,0 +1,101 @@
+.con-login{
+    width: 100%;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 9999;
+    background-image: url('./../../../assets/images/bg-01.jpg');
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+.box-form{
+    width: 350px;
+    position: relative;
+}
+form {    
+    border: 3px solid #ffffff;
+    background: var(--white);
+    border-radius: 8px;
+}
+.input-info{
+    width: 100%;
+    padding: 8px 13px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #bbb;
+    box-sizing: border-box;
+    outline: none;
+    border-radius: 3px;
+}
+.text-info{
+    float: right;
+    font-size: 14px;
+    color: var(--info);
+}
+.text-info:hover, .con-create:hover{
+    color: var(--danger);
+    cursor: pointer;
+}
+button {
+  color: white;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+}
+button:hover {
+  opacity: 0.8;
+}
+.imgcontainer {
+  text-align: center;
+  margin: 24px 0 12px 0;
+}
+
+img.avatar {
+  width: 40%;
+}
+
+.container {
+  padding: 16px;
+}
+
+span.psw {
+  float: right;
+  padding-top: 16px;
+}
+
+@media screen and (max-width: 350px) {
+  span.psw {
+     display: block;
+     float: none;
+  }
+  .cancelbtn {
+     width: 100%;
+  }
+  .box-form{
+    width: 350px;
+    height: 100vh;
+    position: relative;
+    background: white;
+}
+}
+@media screen and (max-width:425px){
+    .box-form{
+        width: 80%;
+        position: relative;
+    }
+}
+
+
+
+
+
+
+
+

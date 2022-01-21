@@ -1,0 +1,176 @@
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+::-webkit-input-placeholder {
+  /* Edge */
+  font-size: 12px;
+}
+
+:-ms-input-placeholder {
+  /* Internet Explorer */
+  font-size: 12px;
+}
+
+::placeholder {
+  font-size: 12px;
+}
+
+input {
+  outline-style: none;
+  border-style: none;
+  width: 100%;
+}
+
+.btn {
+  z-index: 2;
+}
+
+.txt-title {
+  text-align: end;
+}
+
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+.txt-danger {
+  margin-right: 6px;
+}
+
+.container-wrap {
+  width: 75%;
+  margin: 0 auto;
+}
+
+.title {
+  margin-top: 20px;
+  font-weight: 600;
+  font-size: 18px;
+}
+
+.content {
+  margin: 10px 0;
+  border-top: 1px solid #fdb432;
+  border-bottom: 1px solid #fdb432;
+  padding: 50px 0;
+}
+
+.split {
+  display: grid;
+  grid-template-columns: 25% auto;
+  gap: 40px;
+  margin-bottom: 35px;
+}
+
+.media-exist {
+  display: flex;
+  background: #f8f8f8;
+}
+
+.input-container {
+  border: 1px solid #cccccc;
+  background: white;
+  border-radius: 6px;
+  padding: 4px 6px;
+  position: relative;
+  height: 34px;
+}
+
+.select {
+  display: grid;
+  gap: 4px;
+}
+
+.radio-item {
+  display: inline-block;
+  position: relative;
+  padding: 0 6px;
+}
+
+.radio-item input[type="radio"] {
+  display: none;
+}
+
+.radio-item label:before {
+  content: " ";
+  display: inline-block;
+  position: relative;
+  top: 2px;
+  margin: 0 5px 0 0;
+  width: 13px;
+  height: 13px;
+  border-radius: 11px;
+  border: 1px solid #fdb432;
+  background-color: transparent;
+}
+
+.radio-item input[type="radio"]:checked+label:after {
+  border-radius: 11px;
+  width: 7px;
+  height: 7px;
+  position: absolute;
+  top: 9px;
+  left: 9px;
+  content: " ";
+  display: block;
+  background: #fdb432;
+}
+
+i.far.fa-question-circle {
+  font-size: 13px;
+}
+
+/** Category select box */
+
+.selectBox {
+  position: relative;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  height: 36px;
+}
+
+.selectBox select {
+  width: 100%;
+  border: none;
+  background: transparent;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.overSelect {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+}
+
+#checkboxes {
+  border: 1px solid #ccc;
+  position: absolute;
+  background: white;
+  z-index: 2;
+  width: 100%;
+  top: 35px;
+  padding: 5px 15px;
+  font-weight: 600;
+}
+
+#checkboxes div {
+  display: block;
+  font-weight: 400;
+}
+
+#selection-option div:hover {
+  background-color: #1e90ff;
+}
+
+.checkbox-input {
+  width: 25px !important;
+}

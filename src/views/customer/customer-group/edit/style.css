@@ -1,0 +1,146 @@
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+::-webkit-input-placeholder {
+  /* Edge */
+  font-size: 12px;
+}
+
+:-ms-input-placeholder {
+  /* Internet Explorer */
+  font-size: 12px;
+}
+
+::placeholder {
+  font-size: 12px;
+}
+
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+input {
+  outline-style: none;
+  border-style: none;
+  width: 100%;
+}
+
+.container-wrap {
+  width: 75%;
+  margin: 0 auto;
+}
+
+.title {
+  margin-top: 20px;
+  font-weight: 600;
+  font-size: 18px;
+}
+
+.content {
+  margin: 10px 0;
+  border-top: 1px solid #fdb432;
+  border-bottom: 1px solid #fdb432;
+  padding: 50px 0;
+}
+
+.split {
+  display: grid;
+  grid-template-columns: 30% auto;
+  gap: 40px;
+  margin-bottom: 35px;
+}
+
+.input-container {
+  border: 1px solid #cccccc;
+  border-radius: 6px;
+  padding: 4px 6px;
+}
+
+.select {
+  display: grid;
+  gap: 4px;
+}
+
+.radio-item {
+  display: inline-block;
+  position: relative;
+  padding: 0 6px;
+}
+
+.radio-item input[type="radio"] {
+  display: none;
+}
+
+.radio-item label:before {
+  content: " ";
+  display: inline-block;
+  position: relative;
+  top: 2px;
+  margin: 0 5px 0 0;
+  width: 13px;
+  height: 13px;
+  border-radius: 11px;
+  border: 1px solid #fdb432;
+  background-color: transparent;
+}
+
+.radio-item input[type="radio"]:checked+label:after {
+  border-radius: 11px;
+  width: 7px;
+  height: 7px;
+  position: absolute;
+  top: 9px;
+  left: 9px;
+  content: " ";
+  display: block;
+  background: #fdb432;
+}
+
+.btn {
+  z-index: 2;
+}
+
+.txt-title {
+  text-align: end;
+}
+
+.txt-danger {
+  margin-right: 6px;
+}
+
+
+
+.desc {
+  resize: none;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  height: 110px;
+  width: 100%;
+}
+
+.desc::-webkit-scrollbar {
+  display: none;
+}
+
+@media screen and (max-width: 650px) {
+
+  .col-3,
+  .col-9 {
+    width: 100%;
+  }
+
+  .text-right-reponse {
+    text-align: start;
+  }
+}
+
+@media screen and (max-width: 375px) {
+  .imagePreviewWrapper {
+    width: 100%;
+  }
+}

@@ -1,0 +1,43 @@
+<div class="row p6 radius6 animate-bottom">
+  <div class="row bg-white border-top-light-blue">
+    <div class="container-wrap">
+      <div class="title">
+        Top Selection Product
+      </div>
+
+      <div class="content">
+        <div class="split">
+          <div class="txt-title">
+            <span class="txt-danger" style="line-height: 31px;">*</span>
+            <span class="line-h31">Product :</span>
+          </div>
+
+          <multiselect v-model="body.product" placeholder="Search" label="name" track-by="id"
+            :options="data.productList" :multiple="false" :taggable="false" style="height: 36px;"></multiselect>
+
+        </div>
+
+        <div class="split mt35">
+          <div class="txt-title">
+            <span class="txt-danger" style="line-height: 31px;">*</span>
+            <span class="line-h31">Sort order :</span>
+          </div>
+
+          <div class="input-container">
+            <input v-model.number="body.sortOrder" type="number" placeholder="input order..." />
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12 p6 mb12" style="display: flex;justify-content: flex-end;">
+        <button @click="goBack" class="btn btn-light-secondary mr8">
+          Cancel
+        </button>
+        <button v-if="!isCreating" @click="subminCreateTopSelection" class="btn btn-light-info">
+          Create
+        </button>
+        <button v-else class="btn btn-light-info">Loading...</button>
+      </div>
+    </div>
+  </div>
+</div>

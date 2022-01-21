@@ -1,0 +1,27 @@
+a{
+    text-decoration: none;
+    line-height: 18px;
+  }
+  button.btn.btn-theme-grey-light.btn-xs {
+    margin: 0 5px;
+  }
+  .red {
+    color: red;
+  }
+  .green {
+    color: green;
+  }
+  .btn-create {
+    background-color: var(--dark);
+    color: #fff;
+    margin-right: 7px;
+    width: 170px;
+    font-weight: 600;
+    height: 32px;
+    border-radius: 4px;
+    font-size: 12px;
+  }
+  .btn-xs{
+    width: 72px;
+  }
+  

@@ -1,0 +1,52 @@
+<div class="row p6 radius6 animate-bottom">
+  <div class="row bg-white border-top-light-blue">
+    <div class="container-wrap">
+      <div class="title">
+        Stock Status
+      </div>
+
+      <div class="content">
+        <div class="split">
+          <div class="txt-title">
+            <span class="txt-danger" style="line-height: 31px;">*</span>
+            <span class="line-h31">Name :</span>
+          </div>
+
+          <div class="input-container">
+            <input v-model="body.name" type="text" placeholder="input name..." />
+          </div>
+        </div>
+
+        <div class="split mt35">
+          <div class="txt-title">
+            <span class="line-h31">Sort order :</span>
+          </div>
+
+          <div class="input-container">
+            <input v-model.number="body.sortOrder" type="number" placeholder="input order..." />
+          </div>
+        </div>
+
+        <div class="split mt35" style="margin-bottom: 0;">
+          <div class="txt-title">
+            <span class="txt-danger" style="line-height: 31px;"></span>
+            <span class="line-h31">Description :</span>
+          </div>
+
+          <textarea v-model="body.description" type="text" placeholder="Description..."
+            class="input outline-dark desc"></textarea>
+        </div>
+      </div>
+
+      <div class="col-12 p6 mb12" style="display: flex;justify-content: flex-end;">
+        <button @click="goBack" class="btn btn-light-secondary mr8">
+          Cancel
+        </button>
+        <button v-if="!isCreating" @click="subminCreateStockStatus" class="btn btn-light-info">
+          Create
+        </button>
+        <button v-else class="btn btn-light-info">Loading...</button>
+      </div>
+    </div>
+  </div>
+</div>

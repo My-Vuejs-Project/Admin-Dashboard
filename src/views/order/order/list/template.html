@@ -1,0 +1,77 @@
+<div class="row">
+  <div class="row p6 radius6 animate-bottom">
+    <div class="row p12 bg-white border-top-light-blue">
+      <header class="navbar r-navbar">
+        <div class="ul-xl">
+          <div class="ul-xl-li">
+            Orders
+          </div>
+        </div>
+
+        <div class="con-search-btn" style="position: unset;">
+
+          <div class="input-container" style="width: 170px;margin-left: 5px;">
+            <input @change="searching" v-model="search.invoiceNumber" type="text" placeholder="invoice number..." />
+          </div>
+          <div class="input-container" style="width: 170px;margin-left: 5px;">
+            <input @change="searching" v-model="search.transactionNumber" type="text"
+              placeholder="transaction number..." />
+          </div>
+          <div class="input-container" style="width: 150px;margin-left: 5px;">
+            <input @change="searching" v-model="search.accountId" type="text" placeholder="account id..." />
+          </div>
+
+          <button @click="searching()" class="btn btn-theme-grey-light btn-xs btn-create" style="margin-right: 0">
+            Search
+          </button>
+        </div>
+      </header>
+
+      <div class="table-control p12">
+        <table class="table wh800" cellspacing="0">
+          <thead>
+            <tr>
+              <th>No</th>
+              <th>Invoice Number</th>
+              <th>Transaction Number</th>
+              <th>Customer </th>
+              <th>Status</th>
+              <th>Total</th>
+              <th>Payment Method</th>
+              <th>Date Added</th>
+
+              <th style="text-align: center">Action</th>
+            </tr>
+          </thead>
+          <tbody v-if="!isFetching && checkoutPermission('LIST_ORDER')">
+            <tr v-for="(order, index) in data.order" :key="(order,index)" class="hover-list">
+              <td>{{index+1}}</td>
+              <td>{{order.invoiceNumber}}</td>
+              <td>{{order.transactionNumber}}</td>
+              <td>{{order.account.firstName}} {{order.account.lastName}}</td>
+              <td style="text-transform: capitalize;">{{order.paymentStatus}}</td>
+              <td>${{(order.totalAmount).toFixed(2)}}</td>
+              <td>{{order.paymentMethod.name}}</td>
+              <td>{{order.createdAt | moment("DD-MM-YYYY h:mm A")}}</td>
+              <td style="text-align: center;">
+                <button v-if="checkoutPermission('GET_ORDER_DETAIL')" @click="viewOrder(order.id)"
+                  class="w72 btn btn-light-info btn-xs" style="text-decoration: none;">
+                  View
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <TableLoading v-if="isFetching" />
+        <NoItem v-if="isNoData" />
+      </div>
+      <div class="total ph12">
+        <div class="ul-xl-li go-left">
+          Total : {{data.pagination.total}}
+        </div>
+        <Pagination v-if="data.pagination.totalPage > 0" :pagination="data.pagination.totalPage" />
+      </div>
+    </div>
+  </div>
+
+</div>

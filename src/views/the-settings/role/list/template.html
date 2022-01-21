@@ -1,0 +1,86 @@
+<div class="row">
+  <div class="row p6 radius6 animate-bottom">
+    <div class="row p12 bg-white border-top-light-blue">
+      <header class="navbar r-navbar">
+        <div class="ul-xl txt-sm">
+          Role Management
+        </div>
+
+        <select v-model ="search.status" @change="searchStatus" class="input input-xs mr6 filter-type" style="width: 300px;">
+          <option value="">All Status</option>
+          <option value="active" class="option-all">Active</option>
+          <option value="inactive">Inactive</option>
+        </select>
+        <router-link v-if="checkoutPermission('CREATE_ADMIN_ROLE')" :to="{name : 'CreateRole'}"
+          class="btn btn-theme-grey-light btn-create">
+          + Create Role
+        </router-link>
+      </header>
+
+      <div class="table-control p12">
+        <table class="table wh800" cellspacing="0">
+          <thead>
+            <tr>
+              <th>No</th>
+              <th class="table-name">Name</th>
+              <th width="100px">Status</th>
+              <th v-if="checkoutPermission('UPDATE_ADMIN_ROLE') || checkoutPermission('DELETE_ADMIN_ROLE')" class="tr-left">
+                Action</th>
+            </tr>
+          </thead>
+          <tbody v-if="!isFetching && checkoutPermission('LIST_ADMIN_ROLE')">
+            <tr v-for="(role,index) in data.roleList" :key="(role,index)" class="hover-list">
+              <td>{{index+1}}</td>
+              <td class="table-name">{{role.name}}</td>
+              <td>
+                <span v-if="role.status == 'active'" class="txt-success">Active</span>
+                <span v-else class="txt-danger">Inactive</span>
+              </td>
+              <td class="tr-left">
+                <router-link v-if="checkoutPermission('UPDATE_ADMIN_ROLE')" :to="{name : 'EditRole', query: {id:role.id}}"
+                  class="btn btn-light-info btn-xs">
+                  Update
+                </router-link>
+                <button v-if="checkoutPermission('DELETE_ADMIN_ROLE')" @click="popupModalDelete(index)"
+                  class="btn btn-light-dark btn-xs">
+                  Delete
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <TableLoading v-if="isFetching" />
+        <NoItem v-if="isNoData" />
+      </div>
+      <div class="total ph12">
+        <div class="ul-xl-li go-left">
+          Total : {{data.roleList.length}}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div v-if="display.modal.delete.show" class="overlay">
+    <div @click="closeModal" class="overlay"></div>
+    <div class="modal-md">
+      <div class="modal-header border-bottom txt-info">
+        <span class="txt-sm">Delete</span>
+      </div>
+      <div class="modal-body" style="overflow-y: hidden; padding: 16px;">
+        <span>Do you want to delete this record?</span>
+      </div>
+      <div class="modal-footer border-top">
+        <button v-if="!isDeleting" @click="deleteRole" class="btn btn-light-info btn-xs go-right">
+          Yes
+        </button>
+        <button v-else class="btn btn-light-info btn-xs go-right">
+          Loading...
+        </button>
+
+        <button @click="closeModal" class="btn btn-light-secondary btn-xs mr12 go-right">
+          No
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

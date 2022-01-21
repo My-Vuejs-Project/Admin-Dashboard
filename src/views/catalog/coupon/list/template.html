@@ -1,0 +1,114 @@
+<div class="row">
+  <div class="row p6 radius6 animate-bottom">
+    <div class="row p12 bg-white border-top-light-blue">
+      <header class="navbar r-navbar">
+        <div class="ul-xl">
+          <div class="ul-xl-li">
+            Coupon
+          </div>
+        </div>
+
+        <div class="con-search-btn" style="position: unset;">
+          <div class="filter display-flex">
+            <select v-model="search.type" class="input input-xs mr6" style="width: 150px;padding: 6px;">
+              <option value="" class="option-all">All Type</option>
+              <option value="percentage">Percentage</option>
+              <option value="fix_amount">Fix Amount</option>
+            </select>
+            <select v-model="search.status" class="input input-xs mr6" style="width: 150px;padding: 6px;">
+              <option value="" class="option-all">All Status</option>
+              <option value="active">Active</option>
+              <option value="inactive">Inactive</option>
+            </select>
+
+            <date-picker v-model="search.dateRange" value-type="format" format="YYYY-MM-DD" range
+              placeholder="Select created date range" style="width: 250px;
+            margin-right: 6px;"></date-picker>
+          </div>
+
+          <button @click="searchCoupon" class="btn btn-theme-grey-light btn-create">
+            Search
+          </button>
+
+          <router-link v-if="checkoutPermission('CREATE_COUPON')" :to="{name : 'CreateCoupon'}"
+            class="btn btn-theme-grey-light btn-create" style="margin-right: 0;">
+            + Create Coupon
+          </router-link>
+        </div>
+      </header>
+
+      <div class="table-control p12">
+        <table class="table wh800" cellspacing="0">
+          <thead>
+            <tr>
+              <th>No</th>
+              <th>Name</th>
+              <th>Code</th>
+              <th>Discount</th>
+              <th>Start Date</th>
+              <th>End Date</th>
+              <th>Status</th>
+              <th v-if="checkoutPermission('UPDATE_COUPON') || checkoutPermission('DELETE_COUPON')"
+                style="text-align: center;width: 100px;">Action</th>
+            </tr>
+          </thead>
+          <tbody v-if="!isFetching && checkoutPermission('LIST_COUPON')">
+            <tr v-for="(coupon,index) in data.coupons" :key="(coupon,index)" class="hover-list">
+              <td>{{index+1}}</td>
+              <td>{{coupon.name}}</td>
+              <td>{{toUpperCase(coupon.code)}}</td>
+              <td>{{coupon.discount}}</td>
+              <td>{{coupon.startDate | moment("DD-MM-YYYY h:mm A")}}</td>
+              <td>{{coupon.endDate | moment("DD-MM-YYYY h:mm A")}}</td>
+              <td>
+                <span v-if="coupon.status == 'active'" class="txt-success">Active</span>
+                <span v-else class="txt-danger">Inactive</span>
+              </td>
+              <td class="tr-right">
+                <router-link v-if="checkoutPermission('UPDATE_COUPON')"
+                  :to="{name : 'EditCoupon', query: {id:coupon.id}}" class="btn btn-light-info btn-xs mr5">
+                  Update
+                </router-link>
+                <button v-if="checkoutPermission('DELETE_COUPON')" @click="popupModal(index)"
+                  class="btn btn-light-dark btn-xs">
+                  Delete
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <TableLoading v-if="isFetching" />
+        <NoItem v-if="isNoData" />
+      </div>
+      <div class="total ph12">
+        <div class="ul-xl-li go-left">
+          Total : {{data.pagination.total}}
+        </div>
+        <Pagination v-if="data.pagination.totalPage > 0" :pagination="data.pagination.totalPage" />
+      </div>
+    </div>
+  </div>
+
+  <div v-if="display.modal.delete.show" class="overlay">
+    <div @click="closeModal" class="overlay"></div>
+    <div class="modal-md">
+      <div class="modal-header border-bottom txt-info">
+        <span class="txt-sm">Delete</span>
+      </div>
+      <div class="modal-body" style="overflow-y: hidden; padding: 16px;">
+        <span>Do you want to delete this record?</span>
+      </div>
+      <div class="modal-footer border-top">
+        <button v-if="!isDeleting" @click="deleteCoupon" class="btn btn-light-info btn-xs go-right">
+          Yes
+        </button>
+        <button v-else class="btn btn-light-info btn-xs go-right">
+          Loading...
+        </button>
+        <button @click="closeModal" class="btn btn-light-secondary btn-xs mr12 go-right">
+          No
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,77 @@
+<div class="row p6 radius6 animate-bottom">
+  <div v-if="display.modal.formError" class="overlay">
+    <div @click="closeModal" class="overlay"></div>
+    <div class="modal-md">
+      <div class="modal-header border-bottom txt-info">
+        <span class="txt-sm">Please re-check field you input !</span>
+      </div>
+
+      <div class="modal-body txt-danger" style="overflow-y: hidden; padding: 16px;">
+        <span>{{display.message.responseError}} !!</span>
+      </div>
+
+      <div class="modal-footer border-top">
+        <button @click="closeModal" class="btn btn-light-secondary btn-xs go-right">
+          Okay
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="row bg-white border-top-light-blue">
+    <div class="back pointer" title="Back" @click="goBack">
+      <i @click="goBack" class="fas fa-arrow-left pointer font24" title="Back"></i>
+    </div>
+
+    <div class="container-wrap">
+      <div class="title">
+        User's Role
+      </div>
+
+      <div class="content">
+        <div class="split">
+          <div class="txt-title">
+            <span class="txt-danger" style="line-height: 31px;">*</span>
+            <span class="line-h31">Role Name :</span>
+          </div>
+
+          <div class="input-container">
+            <input v-model="body.name" type="text" style="width: 100%;" placeholder="input role name..." />
+          </div>
+        </div>
+
+        <div class="split" style="margin-bottom: 0;">
+          <div class="txt-title">
+            <span class="txt-danger" style="line-height: 31px;">*</span>
+            <span class="line-h31">Permissions :</span>
+          </div>
+
+          <div>
+            <button @click="selectAll" class="select-all pointer" title="Select all permissions">Select All</button>  
+
+            <div class="col-12 pt0 p6 go-left select">
+              <div class="label-selection" v-for="(permission, index) in data.listPermission" :key="index">
+                <p class="mb4 font-weight-600">{{permission.title}}</p>
+                <div class="selection-option" v-for="(subpermission, index) in permission.permissions" :key="index">
+                  <input class="checkbox" type="checkbox" :id="subpermission.id"
+                    :value="subpermission.id" v-model.number="body.permissionId" />
+                  <label :for="subpermission.id">{{subpermission.title}}</label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12 p6 mb12" style="display: flex;justify-content: flex-end;">
+        <button @click="goBack" class="btn btn-light-secondary mr8">
+          Cancel
+        </button>
+        <button v-if="!isCreating" @click="submitCreate" class="btn btn-light-info">
+          Create
+        </button>
+        <button v-else class="btn btn-light-info">Loading...</button>
+      </div>
+    </div>
+  </div>
+</div>

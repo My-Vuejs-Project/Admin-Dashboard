@@ -1,0 +1,125 @@
+<div class="row p6 radius6 animate-bottom">
+  <div v-if="imagePreview" class="overlay">
+    <div @click="closeModal" class="overlay"></div>
+    <div class="modal">
+      <img :src="getFullImage(trainingDetail.media[imagePreviewIndex].url)" class="attachment mr6" />
+    </div>
+  </div>
+
+  <div class="row bg-white border-top-light-blue">
+    <div class="font18" style="font-weight: 600 !important; margin: 0px 4px 0px 4px">
+      <i @click="goBack" class="fas fa-arrow-left pointer" title="Back" style="margin-right: 18px;cursor: pointer;"></i>
+      Training Ticket Details
+      <hr>
+    </div>
+
+    <div class="container-wrap">
+      <div class="row">
+        <div class="col-6 col-md-6 p4">
+          <div class="row">
+            <ul class="list-group">
+              <li><i class="fas fa-user"></i> Contact</li>
+              <li v-if="trainingDetail.account" class="profile" style="text-transform: capitalize;">
+                <img :src="getFullImage(trainingDetail.account.imageUrl)" alt=""> {{trainingDetail.account.firstName + ' '
+                + trainingDetail.account.lastName}}
+              </li>
+              <li style="text-transform: capitalize;"><i class="fas fa-user"></i>{{trainingDetail.contactPerson}}</li>
+              <li><i class="fa fa-phone color-999"></i>{{trainingDetail.contactPhone}}</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="col-6 col-md-6 p4">
+          <div class="row">
+            <ul class="list-group">
+              <li><i class="fa fa-shopping-cart"></i> Request Details</li>
+              <li v-if="trainingDetail.type"><b>Type: </b>{{trainingDetail.type.name}}</li>
+              <li><b>Remark: </b>{{trainingDetail.remarks}}</li>
+              <li><b>Sub ID: </b>{{trainingDetail.subId}}</li>
+              <li><b>Provider: </b>{{trainingDetail.provider}}</li>
+              <li><b>Created At: </b>{{trainingDetail.createdAt | moment("DD-MM-YYYY h:mm A")}}</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div hidden class="row mt12">
+        <div class="col-6 col-md-6 p4">
+          <div class="row">
+            <ul class="list-group">
+              <li><i class="fas fa-info-circle"></i> Info</li>
+              <li><b>Sub ID: </b>{{trainingDetail.subId}}</li>
+              <li><b>Provider: </b>{{trainingDetail.provider}}</li>
+              <li><b>Problem Type: </b>{{trainingDetail.problemType}}</li>
+              <li><b>Tech Name: </b>{{trainingDetail.techName}}</li>
+              <li><b>Total: </b>${{trainingDetail.totalAmount}}</li>
+            </ul>
+          </div>
+        </div>
+        
+        <div class="col-6 col-md-6 p4">
+          <div class="row">
+            <ul class="list-group">
+              <li><i class="fa fa-map-marker"></i> Location</li>
+              <li v-if="trainingDetail.location" style="display: grid;">
+                <span><b> Type: </b>{{trainingDetail.location.type}}</span>
+                <span><b> Name: </b>{{trainingDetail.location.name}}</span>
+                <span><b> No: </b>{{trainingDetail.location.houseNo}}</span>
+                <b style="font-weight: 300;"> Street
+                  {{trainingDetail.location.street}} <br></b>
+                <b style="font-weight: 300;"> {{trainingDetail.location.name}}
+                  <br></b>
+                <b style="font-weight: 300;">
+                  {{trainingDetail.location.district.name}} <br></b>
+                <b style="font-weight: 300;">
+                  {{trainingDetail.location.province.name}} <br></b>
+                <b style="font-weight: 300;">
+                  {{trainingDetail.location.country.name}} </b>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div hidden class="row p4 mt12">
+        <ul class="list-group">
+          <li><i class="fas fa-edit"></i>Update Ticket</li>
+          <li>
+            <br>
+            <div class="split">
+              <div class="txt-title">
+                <span class="txt-danger" style="line-height: 31px;">*</span>
+                <span class="line-h31 font14">Description :</span>
+              </div>
+              <textarea v-model="trainingDetail.text" type="text" placeholder="input description..."
+                class="input outline-dark desc"></textarea>
+            </div>
+
+            <div class="split">
+              <div class="txt-title">
+                <span class="txt-danger" style="line-height: 31px;">*</span>
+                <span class="line-h31 font14">Status :</span>
+              </div>
+              <select v-model="trainingDetail.status" class="input input-xs mr6 filter-type">
+                <option value="pending">Pending</option>
+                <option value="closed">Closed</option>
+                <option value="open">Open</option>
+              </select>
+            </div>
+
+            <div class="mt20" style="display: flex;justify-content: flex-end;">
+              <button @click="goBack" class="btn btn-light-secondary mr8">
+                Cancel
+              </button>
+              <button v-if="!isUpdating" class="btn btn-light-info">
+                Update
+              </button>
+              <button v-else class="btn btn-light-info">Loading...</button>
+            </div>
+            <br>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

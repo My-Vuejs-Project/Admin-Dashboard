@@ -1,0 +1,101 @@
+<div class="row p6 radius6 animate-bottom wrap">
+  <div v-if="display.imagePreview" class="overlay">
+    <div @click="closeModal" class="overlay"></div>
+    <div class="modal">
+      <img :src="body.detail.product.imageUrl" height="100%"/>
+    </div>
+  </div>
+
+  <div class="row bg-white border-top-light-blue">
+    <div class="container-wrap">
+      <div class="title">
+        Review
+      </div>
+
+      <div class="content">
+        <div class="split">
+          <div class="txt-title">
+            <span class="line-h31">Reviewer :</span>
+          </div>
+
+          <div class="input-container">
+            {{body.detail.account.firstName}} {{body.detail.account.lastName}}
+          </div>
+        </div>
+
+        <div class="split">
+          <div class="txt-title">
+            <span class="line-h31">Image :</span>
+          </div>
+
+          <div @click="imagePreview" class="media-container pointer" style="position: relative;">
+            <div style="width: 100%;border-radius: 4px;border:1px solid #ccc;padding:3px;display: inline-block;">
+              <div v-if="body.detail && body.detail.product && body.detail.product.imageUrl" class="go-left">
+                <img :src="body.detail.product.imageUrl" height="35px" class="attachment mr6" />
+                <span class="font12 p-file-name mr6"
+                  style="line-height: 35px;">{{getNameFromUrl(body.detail.product.imageUrl)}}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="split">
+          <div class="txt-title">
+            <span class="line-h31">Product/Showroom :</span>
+          </div>
+
+          <div class="input-container">
+            {{body.detail.product.name}}
+          </div>
+        </div>
+
+        <div class="split">
+          <div class="txt-title">
+            <span class="txt-danger" style="line-height: 31px;">*</span>
+            <span class="line-h31">Rating :</span>
+          </div>
+
+          <star-rating :inline="true" :star-size="30" v-model="body.detail.rating" :show-rating="false" :rating="body.detail.rating"></star-rating>
+        </div>
+
+        <div class="split" style="align-items: normal;">
+          <div class="txt-title">
+            <span class="txt-danger" style="line-height: 31px;">*</span>
+            <span class="line-h31">Review :</span>
+          </div>
+
+          <div class="input-container">
+            <textarea class="desc" v-model="body.detail.text" type="text" placeholder="Input title..."></textarea>
+          </div>
+        </div>
+
+        <div class="split" style="margin-bottom: 0;">
+          <div class="txt-title">
+            <span class="txt-danger" style="line-height: 31px;">*</span>
+            <span class="line-h31">Status :</span>
+          </div>
+
+          <div class="select">
+            <div class="radio-item">
+              <input type="radio" id="active" v-model="body.detail.status" value="active" />
+              <label for="active">Active</label>
+            </div>
+
+            <div class="radio-item">
+              <input type="radio" id="inactive" v-model="body.detail.status" value="inactive" />
+              <label for="inactive">Inactive</label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12 p6 mb12" style="display: flex;justify-content: flex-end;">
+        <button @click="goBack" class="btn btn-light-secondary mr8">
+          Cancel
+        </button>
+        <button v-if="!isUpdating" @click="confirmUpdate" class="btn btn-light-info">Update</button>
+        <button v-else class="btn btn-light-info">Loading...</button>
+      </div>
+    </div>
+  </div>
+</div>

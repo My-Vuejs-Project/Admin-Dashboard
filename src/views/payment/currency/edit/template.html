@@ -1,0 +1,46 @@
+<div class="row p6 radius6 animate-bottom">
+  <div class="row bg-white border-top-light-blue">
+    <div class="container-wrap">
+      <div class="title">
+        Update Currency
+      </div>
+
+      <div class="content">
+        <div class="split mt35">
+          <div class="txt-title">
+            <span class="txt-danger" style="line-height: 31px;">*</span>
+            <span class="line-h31">Name :</span>
+          </div>
+
+          <div>
+            <div class="input-container">
+              <input v-model="data.currencyDetail.name" type="text" placeholder="Input name..." />
+            </div>
+          </div>
+        </div>
+
+        <div class="split">
+          <div class="txt-title">
+            <span class="txt-danger" style="line-height: 31px;">*</span>
+            <span class="line-h31">Currency Code :</span>
+          </div>
+
+          <div class="input-container not-allowed">
+            <input disabled v-model="data.currencyDetail.code" type="text" class="not-allowed"/>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="col-12 p6 mb12" style="display: flex;justify-content: flex-end;">
+        <button @click="goBack" class="btn btn-light-secondary mr8">
+          Cancel
+        </button>
+        <button v-if="!isUpdating" @click="submitUpdateCurrency" class="btn btn-light-info">
+          Update
+        </button>
+        <button v-else class="btn btn-light-info">Loading...</button>
+      </div>
+    </div>
+  </div>
+</div>

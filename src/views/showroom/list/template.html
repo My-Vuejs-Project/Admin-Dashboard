@@ -1,0 +1,101 @@
+<div class="row">
+  <div class="row p6 radius6 animate-bottom">
+    <div class="row p12 bg-white border-top-light-blue">
+      <header class="navbar r-navbar">
+        <div class="ul-xl">
+          <div class="ul-xl-li">
+            Showroom
+          </div>
+        </div>
+
+        <div class="con-search-btn" style="position: unset;">
+          <router-link v-if="checkoutPermission('CREATE_SHOWROOM')" :to="{name : 'CreateShowroom'}" class="btn btn-theme-grey-light btn-xs btn-create"
+            style="margin-right: 0;">
+            + Create Showroom
+          </router-link>
+        </div>
+      </header>
+
+      <div class="table-control p12">
+        <table class="table wh800" cellspacing="0">
+          <thead>
+            <tr>
+              <th>No</th>
+              <th>Thumbnail</th>
+              <th>Name</th>
+              <th>Address</th>
+              <th>Time(open-close)</th>
+              <th>Working Days</th>
+              <th>Status</th>
+              <th v-if="checkoutPermission('UPDATE_SHOWROOM') || checkoutPermission('DELETE_SHOWROOM')" style="text-align: center;width: 100px;">Action</th>
+            </tr>
+          </thead>
+          <tbody v-if="!isFetching && checkoutPermission('LIST_SHOWROOM')">
+            <tr v-for="(showroom,index) in data.showroom" :key="(showroom,index)" class="hover-list">
+              <td>{{index+1}}</td>
+              <td>
+                <img v-if="showroom.thumbnailUrl" :src="getFullImage(showroom.thumbnailUrl)"
+                  @click="imagePreview(index)" alt="" style="height: 40px;width: 60px; object-fit: cover;" />
+                <img v-else src="@/assets/images/noImage.jpg" style="height: 40px;width: 60px; object-fit: cover;"
+                  alt="No Image">
+              </td>
+              <td>{{showroom.name}}</td>
+              <td class="desc">{{showroom.phone}}, No {{showroom.houseNo}}, Street {{showroom.street}}, {{showroom.district.name}}, {{showroom.province.name}}, {{showroom.country.name}}</td>
+              <td>{{showroom.openingHours}}-{{showroom.closingHours}}</td>
+              <td>{{showroom.workingDays}}</td>
+              <td>
+                <span v-if="showroom.status == 'active'" class="txt-success">Active</span>
+                <span v-else class="txt-danger">Inactive</span>
+              </td>
+              <td class="tr-right">
+                <router-link v-if="checkoutPermission('UPDATE_SHOWROOM')" :to="{name : 'EditShowroom', query: {id: showroom.id}}"
+                  class="btn btn-light-info btn-xs mr5" style="text-decoration: none;">
+                  Update</router-link>
+                <button v-if="checkoutPermission('DELETE_SHOWROOM')" @click="popupModal(index)" class="btn btn-light-dark btn-xs">
+                  Delete
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <TableLoading v-if="isFetching" />
+        <NoItem v-if="isNoData" />
+      </div>
+      <div class="total ph12">
+        <div class="ul-xl-li go-left">
+          Total : {{data.pagination.total}}
+        </div>
+        <Pagination v-if="data.pagination.totalPage > 0" :pagination="data.pagination.totalPage" />
+      </div>
+    </div>
+  </div>
+
+  <div v-if="display.modal.delete.show" class="overlay">
+    <div @click="closeModal" class="overlay"></div>
+    <div class="modal-md">
+      <div class="modal-header border-bottom txt-info">
+        <span class="txt-sm">Delete</span>
+      </div>
+      <div class="modal-body" style="overflow-y: hidden; padding: 16px;">
+        <span>Do you want to delete this record?</span>
+      </div>
+      <div class="modal-footer border-top">
+        <button v-if="!isDeleting" @click="deleteShowroom" class="btn btn-light-info btn-xs go-right">
+          Yes
+        </button>
+        <button v-else class="btn btn-light-info btn-xs go-right">
+          Loading...
+        </button>
+        <button @click="closeModal" class="btn btn-light-secondary btn-xs mr12 go-right">
+          No
+        </button>
+      </div>
+    </div>
+  </div>
+  <div v-if="display.modal.imagePreview.show" class="overlay">
+    <div @click="closeModal" class="overlay"></div>
+    <div class="modal">
+      <img :src="getFullImage(data.showroom[display.modal.imagePreview.index].thumbnailUrl)" alt="" />
+    </div>
+  </div>
+</div>

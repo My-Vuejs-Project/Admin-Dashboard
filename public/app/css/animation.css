@@ -1,0 +1,152 @@
+.fadeIn-overlay{
+  -webkit-animation: fadeIn .3s;
+  animation: fadeIn .3s;
+}
+
+@-webkit-keyframes fadeIn {
+from { opacity: 0; }
+to { opacity: 1; }
+}
+@keyframes fadeIn {
+from { opacity: 0; }
+to { opacity: 1; }
+}
+
+.animate-bottom{
+    -webkit-animation-name: animatebottom;
+    -webkit-animation-duration: 0.7s;
+    animation-name: animatebottom;
+    animation-duration: 0.7s
+}
+@-webkit-keyframes animatebottom {
+    from { bottom:-50px; opacity:0 } 
+    to { bottom:0px; opacity:1 }
+  }
+@keyframes animatebottom { 
+    from{ bottom:-50px; opacity:0 } 
+    to{ bottom:0; opacity:1 }
+}
+
+.animmation-right-left{
+  top: 0;
+  -webkit-animation-name: rightleft;
+  -webkit-animation-duration: 0.7s;
+  animation-name: rightleft;
+  animation-duration: .7s;
+  transition: left .3s ease,right .3s ease;
+}
+@keyframes rightleft {
+  from{ 
+    right:-338px; 
+    opacity:0
+  } 
+  to{ 
+    right:0px; 
+    opacity:1
+  }
+}
+
+.animmation-right-left-close{
+  -webkit-animation-name: rightleftclose;
+  -webkit-animation-duration: 0.7s;
+  animation-name: rightleftclose;
+  animation-duration: .7s;
+  visibility: hidden;
+  transition: left .3s ease,right .3s ease;
+}
+@keyframes rightleftclose {
+  from{ 
+    right:0px;
+    opacity:1
+  } 
+  to{ 
+    right:-338px; 
+    opacity:0
+  }
+}
+.animmation-left-right{
+  -webkit-animation-name: leftright;
+  -webkit-animation-duration: 0.7s;
+  animation-name: leftright;
+  animation-duration: 0.7s;
+  transition: left .3s ease,right .3s ease;
+}
+@keyframes leftright {
+  from{ 
+    left:-338px;
+    opacity:0
+  } 
+  to{ 
+    left:0px;
+    opacity:1
+  }
+}
+.animmation-left-right-close{
+  -webkit-animation-name: leftrightclose;
+  -webkit-animation-duration: 0.7s;
+  animation-name: leftrightclose;
+  animation-duration: 0.7s;
+  visibility: hidden;
+  transition: left .3s ease,right .3s ease;
+}
+@keyframes leftrightclose {
+  from{ 
+    left:0px;
+    opacity:1
+  } 
+  to{ 
+    left:-338px;
+    opacity:0
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.zoom-out {
+    animation-name: stretch;
+    animation-duration: 0.7s; 
+    animation-timing-function: ease-out; 
+    animation-delay: 0;
+    animation-direction: alternate;
+    animation-fill-mode: none;
+    animation-play-state: running;
+}
+  
+@keyframes stretch {
+    0% {
+      transform: scale(.3);
+      border-radius: 100%;
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+
+
+  .popup{
+    animation: popup 0.7s;
+  }
+  
+  @keyframes popup {
+    0%{
+      transform: scale(0);
+    }
+    100%{
+      transform: scale(1);
+    }
+  }
+
+

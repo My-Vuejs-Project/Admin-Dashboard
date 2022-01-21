@@ -1,0 +1,77 @@
+.box-nav-profile {
+  width: 100%;
+  text-align: center;
+  display: inline-block;
+}
+
+.img-round {
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.ul-nav-menu {
+  padding-left: 0;
+  line-height: 0;
+}
+
+.ul-nav-menu a,
+.dropdown {
+  font-size: 13px;
+  white-space: nowrap;
+  position: relative;
+  padding-left: 20px;
+  line-height: 18px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  cursor: pointer;
+  text-decoration: none;
+  color: var(--white);
+  margin: 0;
+  padding: 15px;
+}
+
+.icon {
+  width: 25px;
+}
+
+.ul-nav-menu li:hover,
+.ul-nav-menu a:hover {
+  background: #585858;
+}
+
+.ul-nav-menu .active {
+  background: var(--primary) !important;
+  color: var(--white) !important;
+  font-weight: 600;
+}
+
+.sidebar li a {
+  padding-left: 40px;
+}
+
+.dropdown-icon {
+  position: absolute;
+  right: 20px;
+  font-size: 16px;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 3px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #19222e;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #293141;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #293141;
+}

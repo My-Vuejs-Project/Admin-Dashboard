@@ -1,0 +1,57 @@
+<div>
+  <div v-if="isFetching" class="row bg-white p12">
+    <TableLoading></TableLoading>
+  </div>
+
+  <div v-if="!isFetching">
+    <div class="col-3 col-md-6 p4" style="border-radius:4px;">
+      <div class="row bg-white p12" style="height: 126px;background: white;">
+        <p>Customers</p>
+        <p style="font-size: 36px;">{{data.customers}}</p>
+        <img class="db-image" :src="require('@/assets/images/ic-user.png')" />
+      </div>
+    </div>
+    <div class="col-3 col-md-6 p4" style="border-radius:4px;">
+      <div class="row bg-white p12" style="height: 126px;background: white;">
+        <p>Products</p>
+        <p style="font-size: 36px;">{{data.movies}}</p>
+        <img class="db-image" :src="require('@/assets/images/ic-products.png')" />
+      </div>
+    </div>
+    <div class="col-3 col-md-6 p4" style="border-radius:4px;">
+      <div class="row bg-white p12" style="height: 126px;background: white;">
+        <p>Success Order</p>
+        <p style="font-size: 36px;">{{data.successOrder}}</p>
+        <img class="db-image" :src="require('@/assets/images/ic-order.png')" />
+      </div>
+    </div>
+    <div class="col-3 col-md-6 p4" style="border-radius:4px;">
+      <div class="row bg-white p12" style="height: 126px;background: white;">
+        <p>Customers Online</p>
+        <p style="font-size: 36px;">{{data.watching}}</p>
+        <img class="db-image" :src="require('@/assets/images/ic-users-online.png')" />
+      </div>
+    </div>
+    <div v-if="userAccountAreaChart.labels.length > 0" class="col-6 col-md-12 p4">
+      <div class="bg-white" style="border-radius: 6px;">
+        <div class="row border-bottom p12 txt-center font20">
+          <b>Customer Registration</b>
+        </div>
+        <div class="row p16">
+          <AreaChart :chartData="userAccountAreaChart"></AreaChart>
+        </div>
+      </div>
+    </div>
+
+    <div v-if="paymentMethodPieChart.labels.length > 0" class="col-6 col-md-12 p4">
+      <div class="bg-white" style="border-radius: 6px;">
+        <div class="row border-bottom p12 txt-center font20">
+          <b>Used Payment</b>
+        </div>
+        <div class="row p16">
+          <PieChart :chartData="paymentMethodPieChart"></PieChart>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

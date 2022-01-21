@@ -1,0 +1,91 @@
+<div class="row">
+  <div class="row p6 radius6 animate-bottom">
+    <div class="row p12 bg-white border-top-light-blue">
+      <header class="navbar r-navbar">
+        <div class="ul-xl">
+          <div class="ul-xl-li">
+           Sub type
+          </div>
+        </div>
+        <div class="con-search-btn" style="position: unset;">
+          <router-link :to="{name : 'CreateSubTicketType',query: {id: $route.query.id, type: $route.query.type}}" class="btn btn-theme-grey-light btn-create"
+            style="margin-right: 0;">
+            + Create Sub type
+          </router-link>
+        </div>
+      </header>
+
+      <div class="table-control p12">
+        <table class="table wh800" cellspacing="0">
+          <thead>
+            <tr>
+              <th>No</th>
+              <th>Image</th>
+              <th>Name</th>
+              <th>Description</th>
+              <th>Price</th>
+              <th>Sort Order</th>
+              <th>Status</th>
+              <th style="text-align: center;width: 100px;">Action
+              </th>
+            </tr>
+          </thead>
+          <tbody v-if = "ticketSubTypes.length > 0">
+            <tr v-for="(ticketSubType,index) in ticketSubTypes" :key="(ticketSubType,index)" class="hover-list">
+              <td>{{index+1}}</td>
+              <td>
+                <img v-if="ticketSubType.imageUrl" :src="getFullImage(ticketSubType.imageUrl)" style="height: 36px;width: 60px;object-fit: cover;" />
+                <img v-else :src="require('@/assets/images/noImage.jpg')" alt="No Image" style="height: 40px;" />
+              </td>
+              <td>{{ticketSubType.name}}</td>
+              <td>{{ticketSubType.shortDescription}}</td>
+              <td>{{ticketSubType.price}} $</td>
+              <td>{{ticketSubType.sortOrder}}</td>
+              <td>
+                <span v-if="ticketSubType.status == 'active'" class="txt-success">Active</span>
+                <span v-else class="txt-danger">Inactive</span>
+              </td>
+              <td class="tr-right">
+                <router-link :to="{name : 'EditSubTicketType', params: {ticketSubType}, query: {id:ticketSubType.id, type: ticketSubType.type}}"
+                  class="btn btn-light-info btn-xs mr5">
+                  Update
+                </router-link>
+                <button @click="popupModalDelete(index)" class="btn btn-light-dark btn-xs">
+                  Delete
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <NoItem v-if = "ticketSubTypes.length == 0" />
+      </div>
+    </div>
+  </div>
+
+  <div v-if="display.modal.delete.show" class="overlay">
+    <div @click="closeModal" class="overlay"></div>
+    <div class="modal-md">
+      <div class="modal-header border-bottom txt-info">
+        <span class="txt-sm">Delete</span>
+      </div>
+      <div class="modal-body" style="overflow-y: hidden; padding: 16px;">
+        <span>Do you want to delete this record?</span>
+      </div>
+      <div class="modal-footer border-top">
+        <button v-if="!isDeleting" @click="deleteTicketType" class="btn btn-light-info btn-xs go-right">
+          Yes
+        </button>
+        <button v-else class="btn btn-light-info btn-xs go-right">
+          Loading...
+        </button>
+
+        <button v-if="!isDeleting" @click="closeModal" class="btn btn-light-secondary btn-xs mr12 go-right">
+          No
+        </button>
+        <button v-else class="btn btn-light-secondary btn-xs mr12 go-right">
+          No
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

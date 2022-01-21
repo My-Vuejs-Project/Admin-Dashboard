@@ -1,0 +1,28 @@
+.bg {
+  min-height: 500px;
+}
+
+td {
+  height: 45px;
+}
+
+button.btn.btn-theme-grey-light.btn-xs {
+  margin: 0 5px;
+}
+.red {
+  color: red;
+}
+
+
+.no-content{
+  min-height: 300px;
+  width: 100%;
+  position: relative;
+}
+
+.no-content-wrap{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}

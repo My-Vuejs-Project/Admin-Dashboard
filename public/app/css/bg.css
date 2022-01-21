@@ -1,0 +1,26 @@
+/* background color */
+.bg-white{
+    background: white;
+}
+.bg-black{
+    background: #000000;
+}
+.bg-danger{
+    background: var(--danger);
+}
+.bg-secondary{
+    background: var(--secondary);
+}
+.bg-success{
+    background: var(--success);
+}
+.bg-warning{
+    background: var(--warning);
+}
+.bg-primary{
+    background: var(--primary);
+}
+.bg-light {
+    background: var(--light);
+}
+/* end background color */

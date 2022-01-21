@@ -1,0 +1,328 @@
+.btn{
+    font-weight:400;
+    padding: 6px 18px;
+    border-radius:3px;
+    background-image: none;
+    outline: none;
+    cursor: pointer;
+    border: 1px solid transparent;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+/* button */
+.btn-primary{
+    color: var(--white);
+    background-color: var(--primary);
+    border-color: var(--primary);
+}
+.btn-secondary{
+    color: var(--text-dark);
+    background-color: var(--secondary);
+    border-color: var(--secondary);
+}
+.btn-white{
+    color: var(--text-dark);
+    background-color: var(--white);
+    border-color: var(--white);
+}
+.btn-success{
+    color: var(--white);
+    background-color: var(--success);
+    border-color: var(--success);
+}
+.btn-danger{
+    color: var(--white);
+    background-color: var(--danger);
+    border-color: var(--danger);
+}
+.btn-warning{
+    color: var(--white);
+    background-color: var(--warning);
+    border-color: var(--warning);
+}
+.btn-info{
+    color: var(--white);
+    background-color: var(--info);
+    border-color: var(--info);
+}
+.btn-dark{
+    color: var(--white);
+    background-color: var(--dark);
+    border-color: var(--dark);
+}
+/* end button */
+
+/* button light */
+.btn-light-primary{
+    color: var(--primary);
+    background-color: var(--primary-light);
+}
+.btn-light-secondary{
+    color: var(--text-dark);
+    background-color: var(--secondary);
+}
+.btn-light-white{
+    color: var(--text-dark);
+    background-color: var(--white);
+}
+.btn-light-success{
+    color: var(--success);
+    background-color: var(--success-light);
+}
+.btn-light-danger{
+    color: var(--danger);
+    background-color: var(--danger-light);
+}
+.btn-light-warning{
+    color: var(--warning);
+    background-color: var(--warning-light);
+    border: 1px solid;
+}
+.btn-light-info{
+    color: var(--info);
+    background-color: var(--info-light);
+}
+.btn-light-dark{
+    color: var(--white);
+    background-color: var(--dark-light);
+}
+/* end button light */
+
+/* button dark */
+.btn-secondary-dark{
+    color: var(--text-dark);
+    background-color: var(--secondary-dark);
+}
+/* end button dark */
+
+/* button outline */
+.btn-outline-primary{
+    color: var(--primary);
+    border: 1px solid var(--primary);
+    background: none;
+}
+.btn-outline-secondary{
+    color: var(--text-dark);
+    border: 1px solid var(--secondary);
+    background: none;
+}
+.btn-outline-white{
+    color: var(--text-dark);
+    border: 1px solid var(--white);
+    background: none;
+}
+.btn-outline-success{
+    color: var(--success);
+    border: 1px solid var(--success);
+    background: none;
+}
+.btn-outline-danger{
+    color: var(--danger);
+    border: 1px solid var(--danger);
+    background: none;
+}
+.btn-outline-warning{
+    color: var(--warning);
+    border: 1px solid var(--warning);
+    background: none;
+}
+.btn-outline-info{
+    color: var(--info);
+    border: 1px solid var(--info);
+    background: none;
+}
+.btn-outline-dark{
+    color: var(--dark);
+    border: 1px solid var(--dark);
+    background: none;
+}
+/* end button light */
+
+/* button hover */
+.btn-primary:hover{
+    color: var(--white);
+    background-color: var(--primary-dark);
+}
+.btn-secondary:hover{
+    color: var(--text-dark);
+    background-color: var(--secondary-dark);
+}
+.btn-white:hover{
+    color: var(--primary);
+    background-color: var(--primary-light);
+}
+.btn-warning:hover{
+    color: var(--warning);
+    background-color: var(--warning-light);
+}
+.btn-light-primary:hover{
+    color: var(--white);
+    background-color: var(--primary);
+}
+.btn-light-secondary:hover{
+    color: var(--text-dark);
+    background-color: var(--secondary-dark);
+}
+.btn-light-white:hover{
+    color: var(--primary);
+    background-color: var(--primary-light);
+}
+.btn-light-success:hover{
+    color: var(--white);
+    background-color: var(--success);
+}
+.btn-light-danger:hover{
+    color: var(--white);
+    background-color: var(--danger);
+}
+.btn-light-warning:hover{
+    color: var(--white);
+    background-color: var(--warning);
+}
+.btn-light-info:hover{
+    color: var(--white);
+    background-color: var(--info);
+}
+.btn-light-dark:hover{
+    color: var(--white);
+    background-color: var(--dark);
+}
+.btn-outline-primary:hover{
+    color: var(--primary);
+    background-color: var(--primary-light);
+    border: 1px solid var(--primary-light);
+}
+.btn-outline-secondary:hover{
+    color: var(--text-dark);
+    background-color: var(--secondary);
+    border: 1px solid var(--secondary);
+}
+.btn-outline-secondary:hover{
+    color: var(--text-dark);
+    background-color: var(--white);
+    border: 1px solid var(--white);
+}
+.btn-outline-success:hover{
+    color: var(--success);
+    background-color: var(--success-light);
+    border: 1px solid var(--success-light);
+}
+.btn-outline-danger:hover{
+    color: var(--danger);
+    background-color: var(--danger-light);
+    border: 1px solid var(--danger-light);
+}
+.btn-outline-warning:hover{
+    color: var(--warning);
+    background-color: var(--warning-light);
+    border: 1px solid var(--warning-light);
+}
+.btn-outline-info:hover{
+    color: var(--info);
+    background-color: var(--info-light);
+    border: 1px solid var(--info-light);
+}
+.btn-outline-dark:hover{
+    color: var(--white);
+    background-color: var(--dark-light);
+    border: 1px solid var(--dark-light);
+}
+/* end button hover */
+
+/* button size */
+.btn-lg{
+    height: 48px;
+    font-size: 20px;
+    line-height: 20px;
+    padding-left: 25px;
+    padding-right: 25px;
+}
+.btn-md{
+    height: 38px;
+    font-size: 16px;
+    line-height: 16px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+.btn-sm{
+    height: 31px;
+    font-size: 14px;
+    line-height: 14px;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+.btn-xs{
+    height: 28px;
+    font-size: 12px;
+    line-height: 12px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+/* end button size */
+
+
+.btn-round{
+    border-radius: 20px;
+}
+
+
+
+/* style btn search */
+.con-search-btn{
+    right: 25px;
+    display: flex;
+    align-items: center;
+    position: absolute;
+}
+.box-search-input{
+    margin-right: 7px;
+}
+.box-search-input input{
+    margin-right: 12px;
+    padding: 4px 12px;
+    padding-left: 30px;
+    color: #868686;
+}
+.icon-search{
+    width: 23px;
+    padding: 5px;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 30px;
+    height: 30px;
+}
+
+
+/* style check box */
+.checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 13px;
+    width: 16px \0;
+    height: 13px;
+    height: 16px \0;
+    -webkit-appearance: none;
+    background: white;
+    border: 1px solid #dcdcdc;
+    border: 1px solid transparent \0;
+    border-radius: 1px;
+}
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+.text-btn{
+    height: 33px;
+}

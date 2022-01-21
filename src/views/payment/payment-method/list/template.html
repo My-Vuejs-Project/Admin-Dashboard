@@ -1,0 +1,97 @@
+<div class="row">
+  <div class="row p6 radius6 animate-bottom">
+    <div class="row p12 bg-white border-top-light-blue">
+      <header class="navbar r-navbar">
+        <div class="ul-xl">
+          <div class="ul-xl-li">
+            Payment Method
+          </div>
+        </div>
+
+        <div class="con-search-btn" style="position: unset;">
+          <router-link v-if="checkoutPermission('CREATE_PAYMENT_METHOD')" :to="{name : 'CreatePaymentMethod'}"
+            class="btn btn-theme-grey-light btn-create" style="margin-right: 0;">
+            + Create Payment
+          </router-link>
+        </div>
+      </header>
+
+      <div class="table-control p12">
+        <table class="table wh800" cellspacing="0">
+          <thead>
+            <tr>
+              <th>No</th>
+              <th>Logo</th>
+              <th>Name</th>
+              <th>Sort Order</th>
+              <th width="100px">Status</th>
+              <th v-if="checkoutPermission('UPDATE_PAYMENT_METHOD') || checkoutPermission('DELETE_PAYMENT_METHOD')"
+                style="text-align: center;width: 100px;">Action
+              </th>
+            </tr>
+          </thead>
+          <tbody v-if="!isFetching && checkoutPermission('LIST_PAYMENT_METHOD')">
+            <tr v-for="(payment,paymentIndex) in data.payments" :key="(payment,paymentIndex)" class="hover-list">
+              <td>{{paymentIndex+1}}</td>
+              <td>
+                <img v-if="payment.logoUrl" :src="getFullImage(payment.logoUrl)" style="height: 40px;" />
+                <img v-else :src="require('@/assets/images/noImage.jpg')" alt="No Image" style="height: 40px;" />
+              </td>
+              <td>{{payment.name}}</td>
+              <td class="center">{{payment.sortOrder}}</td>
+              <td>
+                <span v-if="payment.status == 'active'" class="txt-success">Active</span>
+                <span v-else class="txt-danger">Inactive</span>
+              </td>
+              <td class="tr-right">
+                <router-link v-if="checkoutPermission('UPDATE_PAYMENT_METHOD')"
+                  :to="{name : 'EditPaymentMethod', query: {id: payment.id}}" class="btn btn-light-info btn-xs mr5">
+                  Update
+                </router-link>
+                <button v-if="checkoutPermission('DELETE_PAYMENT_METHOD')" @click="popupModalDelete(paymentIndex)"
+                  class="btn btn-light-dark btn-xs">
+                  Delete
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <TableLoading v-if="isFetching" />
+        <NoItem v-if="isNoData" />
+      </div>
+
+      <div class="total ph12">
+        <div class="ul-xl-li">
+          Total : {{data.payments.length}}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div v-if="display.modal.delete.show" class="overlay">
+    <div @click="closeModal" class="overlay"></div>
+    <div class="modal-md">
+      <div class="modal-header border-bottom txt-info">
+        <span class="txt-sm">Delete</span>
+      </div>
+      <div class="modal-body" style="overflow-y: hidden; padding: 16px;">
+        <span>Do you want to delete this record?</span>
+      </div>
+      <div class="modal-footer border-top">
+        <button v-if="!isDeleting" @click="deletePaymentMethod" class="btn btn-light-info btn-xs go-right">
+          Yes
+        </button>
+        <button v-else class="btn btn-light-info btn-xs go-right">
+          Loading...
+        </button>
+
+        <button v-if="!isDeleting" @click="closeModal" class="btn btn-light-secondary btn-xs mr12 go-right">
+          No
+        </button>
+        <button v-else class="btn btn-light-secondary btn-xs mr12 go-right">
+          No
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

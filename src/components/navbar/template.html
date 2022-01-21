@@ -1,0 +1,32 @@
+<div class="navbar-container navbar-sticky">
+  <ul class="ul-navbar">
+    <li>
+      <p class="nav-item menu-sidebar" @click="popup('sidebar')">
+        <i class="fas fa-bars"></i>
+      </p>
+    </li>
+    <li class="go-right" @click="display.modal.logout = true">
+      <p class="nav-item name-admin">Logout</p>
+    </li>
+  </ul>
+  <div @click="closemodel" v-if="display.modal.sidebar" class="overlay-slide fadeIn-overlay"></div>
+  <div :class="display.modal.sidebar ? 'sidebar-con animmation-left-right' : 'sidebar-con animmation-left-right-close'">
+    <Menusidebar></Menusidebar>
+  </div>
+  
+  <div v-if="display.modal.logout" class="overlay">
+    <div @click="closeLogout" class="overlay"></div>
+    <div class="modal-md">
+      <div class="modal-header border-bottom txt-info">
+        <span class="txt-sm" style="display: flex;align-items: center;">Logout</span>
+      </div>
+      <div class="modal-body" style="overflow-y: hidden; padding: 16px;">
+        <span>Are you sure you want to Logout ?</span>
+      </div>
+      <div class="modal-footer border-top">
+        <button @click="logout" class="btn btn-light-danger btn-xs go-right">Logout</button>
+        <button @click="display.modal.logout = false" class="btn btn-light-secondary btn-xs mr12 go-right">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>

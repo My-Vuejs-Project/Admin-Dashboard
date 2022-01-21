@@ -1,0 +1,15 @@
+<div v-if = "!map.isOpenMap">
+  <div v-if = "map.isLoading" class="overlay">
+  </div>
+  <div class="input-container">
+    <gmap-autocomplete @place_changed="initMarker"></gmap-autocomplete>
+  </div>
+  <label style="margin: 4px;">
+    <button @click="addLocationMarker">Add</button>
+    <button style="margin-left: 4px;" @click="getCurrentLocation">Location</button>
+    <button style="float: right;margin-right: 4px;" @click="getStreetAddressFrom(true)">Done</button>
+  </label>
+  <gmap-map :zoom="14" :center="map.center" style="width:100%; height: 400px; margin-top: 4px;">
+    <gmap-marker :position="map.center" :draggable="true" @drag="updateCoordinates"></gmap-marker>
+  </gmap-map>
+</div>

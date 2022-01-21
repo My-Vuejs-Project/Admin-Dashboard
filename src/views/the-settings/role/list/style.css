@@ -1,0 +1,155 @@
+a {
+  text-decoration: none;
+  text-align: center;
+}
+
+.ul-xl {
+  width: 100%;
+  display: inline-flex;
+  align-items: center;
+  font-weight: 600;
+}
+
+td {
+  height: 45px;
+}
+
+.table-name {
+  padding-left: 42px;
+}
+
+button.btn.btn-light-dark.btn-xs {
+  margin: 0 5px;
+}
+
+.red {
+  color: red;
+}
+
+.btn-create {
+  background-color: var(--dark);
+  color: #fff;
+  margin-right: 7px;
+  width: 170px;
+  font-weight: 600;
+  height: 32px;
+  border-radius: 4px;
+  font-size: 12px;
+}
+
+.total {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 12px;
+}
+
+header.navbar.r-navbar.mobile {
+  display: none;
+}
+
+.con-search-btn.mobile {
+  display: none;
+}
+
+.btn-xs {
+  width: 72px;
+}
+
+.filter-type {
+  width: 200px;
+  padding: 6px;
+}
+
+@media screen and (max-width: 768px) {
+  header.navbar.r-navbar.mobile {
+    display: flex;
+    margin-top: 12px;
+  }
+
+  .filter.mobile,
+  .search-box.mobile {
+    display: flex;
+  }
+
+  .btn-create {
+    width: 300px;
+  }
+
+  .filter-date {
+    display: flex;
+    align-items: center;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  header.navbar.r-navbar.mobile {
+    display: block;
+  }
+
+  .con-search-btn {
+    display: none;
+  }
+
+  .con-search-btn.mobile {
+    display: flex;
+  }
+
+  .btn-create {
+    width: 100%;
+  }
+
+  .search-box.mobile {
+    width: 100%;
+    margin: 0 6px;
+  }
+
+  .filter.mobile {
+    margin-top: 12px;
+    margin: 12px 6px 0;
+    justify-content: space-between;
+  }
+
+  .filter-date {
+    width: 50%;
+  }
+
+  input#startDate,
+  input#endDate {
+    width: 100%;
+  }
+
+  input#endDate {
+    margin-right: 0;
+  }
+
+  .modal-md {
+    width: 85%;
+  }
+
+  .total {
+    display: block;
+    text-align: center;
+  }
+}
+
+@media screen and (max-width: 375px) {
+  .filter.mobile {
+    display: block;
+  }
+
+  .filter-date {
+    width: 100%;
+  }
+
+  .filter-date.start {
+    margin-bottom: 12px;
+  }
+
+  .filter-date span {
+    width: 33px;
+  }
+
+  input#startDate {
+    margin-right: 0;
+  }
+}

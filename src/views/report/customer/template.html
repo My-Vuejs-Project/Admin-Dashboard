@@ -1,0 +1,97 @@
+<div class="row p6 radius6 animate-bottom">
+  <div class="row bg-white border-top-light-blue">
+    <div class="container-wrap">
+      <div class="title">
+        Filter Customer Report
+      </div>
+
+      <div class="content">
+        <div class="split">
+          <div class="txt-title">
+            <span class="line-h31">Order Status :</span>
+          </div>
+
+          <select v-model="body.orderStatus" class="input-container">
+            <option value="">All Status</option>
+            <option value="active">Active</option>
+            <option value="inactive">Inactive</option>
+          </select>
+        </div>
+      </div>
+
+      <div
+        class="col-12 p6 mb12"
+        style="display: flex;justify-content: flex-end;"
+      >
+        <div>
+          <button
+            v-if="!isGenerating"
+            @click="generateReport('')"
+            class="btn btn-theme-grey-light btn-xs btn-create"
+          >
+            <span>Generate</span>
+          </button>
+          <button v-else class="btn btn-theme-grey-light btn-xs btn-create">
+            <span>Generating...</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div v-if="isGenerated" class="row bg-white border-top-light-blue mt26">
+    <input type="file" id="file" hidden />
+    <div
+      class="table-control p12"
+      style="background-color: white; width: 100%;"
+    >
+      <header class="navbar r-navbar report-header mb12">
+        <div class="ul-xl">
+          <div class="ul-xl-li">
+            Reports
+          </div>
+        </div>
+
+        <div
+          v-if="table.headers.length > 0 && table.body.length > 0"
+          class="con-search-btn"
+          style="position: unset;"
+        >
+          <button
+            v-if="!isExporting"
+            @click="generateReport('export')"
+            class="btn btn-theme-grey-light btn-xs btn-create"
+          >
+            Export File
+          </button>
+          <button v-else class="btn btn-theme-grey-light btn-xs btn-create">
+            <span>Exporting...</span>
+          </button>
+        </div>
+      </header>
+
+      <table class="table wh800" cellspacing="0">
+        <thead>
+          <tr>
+            <th v-for="item in table.headers" class="table-header">{{item}}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr
+            v-for="(item, index) in table.body"
+            :key="(item, index)"
+            class="hover-list"
+          >
+            <td v-for="(key,keyIndex) in item">
+              {{keyIndex == 'Created Date' ? ExcelDateToJSDate(key) : nullValue(key)}}
+            </td>
+          </tr>
+        </tbody>
+        <tfoot></tfoot>
+      </table>
+      <div v-if="table.body.length == 0" class="row">
+        <p class="txt-center" style="line-height:300px">No Report</p>
+      </div>
+    </div>
+  </div>
+</div>

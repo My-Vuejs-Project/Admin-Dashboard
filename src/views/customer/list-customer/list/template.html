@@ -1,0 +1,111 @@
+<div class="row">
+  <div class="row p6 radius6 animate-bottom">
+    <div class="row p12 bg-white border-top-light-blue">
+      <header class="navbar r-navbar">
+        <div class="ul-xl" style="justify-content: space-between;">
+          <div class="ul-xl-li">
+            Customers List
+          </div>
+        </div>
+
+        <div class="con-search-btn" style="position: unset;">
+          <div class="search-box mr8 search-email">
+            <img class="pointer" :src="require('@/assets/images/search.svg')" alt="" />
+            <input @change="filterSearch" v-model="search.email" type="search" placeholder="Email" id="search"
+              v-on:keyup.enter="filterSearch" />
+          </div>
+
+          <div class="search-box mr8 search-username">
+            <img class="pointer" :src="require('@/assets/images/search.svg')" alt="" />
+            <input @change="filterSearch" v-model="search.username" type="search" placeholder="Username" id="search"
+              v-on:keyup.enter="filterSearch" />
+          </div>
+
+          <date-picker @change="filterSearch" v-model="search.dateRange" value-type="format" format="YYYY-MM-DD" range
+            placeholder="Select date range" class="search-date"></date-picker>
+
+          <select @change="filterSearch" v-model="search.status" class="input input-xs mr6 filter-type">
+            <option value="" class="option-all">All Status</option>
+            <option value="active">Active</option>
+            <option value="inactive">Inactive</option>
+          </select>
+          <button @click="filterSearch" class="btn btn-theme-grey-light btn-create">
+            Search
+          </button>
+        </div>
+      </header>
+
+      <div class="table-control p12">
+        <table class="table wh800" cellspacing="0">
+          <thead>
+            <tr>
+              <th>No</th>
+              <th>Customer Name</th>
+              <th>Email</th>
+              <th>Phone</th>
+              <th>Custom Group</th>
+              <th>Date Added</th>
+              <th width="100px">Status</th>
+              <th class="txt-center">Action</th>
+            </tr>
+          </thead>
+          <tbody v-if="!isFetching && checkoutPermission('LIST_CUSTOMER_ACCOUNT')">
+            <tr v-for="(customer,index) in data.customers" :key="(customer,index)" class="hover-list">
+              <td>{{index+1}}</td>
+              <td>{{customer.username ? customer.username : 'N/A'}}</td>
+              <td>{{customer.email ? customer.email : 'N/A'}}</td>
+              <td>{{customer.phone ? customer.phone : 'N/A'}}</td>
+              <td>{{customer.customerGroup ? customer.customerGroup : 'N/A'}}</td>
+              <td>{{customer.createdAt | moment("DD-MM-YYYY hh:mm A") }}</td>
+              <td :class="customer.status == 'active' ? 'txt-success text-capitalize' : 'txt-danger text-capitalize'">
+                {{customer.status}}
+              </td>
+              <td class="txt-center">
+                <button v-if="customer.status == 'inactive'" @click="popup('active',index)"
+                  class="btn btn-light-info btn-xs">
+                  Active
+                </button>
+
+                <button v-else class="btn btn-secondary btn-xs" @click="popup('inactive',index)">
+                  Inactive
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <TableLoading v-if="isFetching" />
+        <NoItem v-if="isNoData" />
+      </div>
+      <div class="total p12">
+        <div class="ul-xl-li go-left">
+          Total : {{data.pagination.total}}
+        </div>
+        <Pagination v-if="data.pagination.totalPage" :pagination="data.pagination.totalPage" />
+      </div>
+    </div>
+  </div>
+
+  <div v-if="modal.delete" class="overlay">
+    <div @click="closeModal" class="overlay"></div>
+    <div class="modal-md">
+      <div class="modal-header border-bottom txt-info">
+        <span class="txt-sm">Update</span>
+      </div>
+      <div class="modal-body" style="overflow-y: hidden; padding: 16px;">
+        <span>Do you want to update this record?</span>
+      </div>
+      <div class="modal-footer border-top">
+        <button v-if="!isDeleting" @click="confirmUpdate" class="btn btn-light-info btn-xs go-right">
+          Yes
+        </button>
+        <button v-else class="btn btn-light-info btn-xs go-right">
+          Loading...
+        </button>
+
+        <button @click="closeModal" class="btn btn-light-secondary btn-xs mr12 go-right">
+          No
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

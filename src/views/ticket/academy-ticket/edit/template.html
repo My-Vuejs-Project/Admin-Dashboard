@@ -1,0 +1,121 @@
+<div class="row p6 radius6 animate-bottom">
+  <div v-if="imagePreview" class="overlay">
+    <div @click="closeModal" class="overlay"></div>
+    <div class="modal">
+      <img :src="getFullImage(academyDetail.media[imagePreviewIndex].url)" class="attachment mr6" />
+    </div>
+  </div>
+
+  <div class="row bg-white border-top-light-blue">
+    <div class="font18" style="font-weight: 600 !important; margin: 0px 4px 0px 4px">
+      <i @click="goBack" class="fas fa-arrow-left pointer" title="Back" style="margin-right: 18px;cursor: pointer;"></i>
+      Academy Ticket Details
+      <hr>
+    </div>
+
+    <div class="container-wrap">
+      <div class="row">
+        <div class="col-4 col-md-6 p4">
+          <div class="row">
+            <ul class="list-group">
+              <li><i class="fas fa-user"></i> Contact</li>
+              <li v-if="academyDetail.account" class="profile" style="text-transform: capitalize;">
+                <img :src="getFullImage(academyDetail.account.imageUrl)" alt=""> {{academyDetail.account.firstName + ' '
+                + academyDetail.account.lastName}}
+              </li>
+              <li style="text-transform: capitalize;"><i class="fas fa-user"></i> {{academyDetail.contactPerson}}</li>
+              <li><i class="fa fa-phone color-999"></i> {{academyDetail.contactPhone}}</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="col-4 col-md-6 p4">
+          <div class="row">
+            <ul class="list-group">
+              <li><i class="fa fa-shopping-cart"></i> Request Details</li>
+              <li v-if="academyDetail.type"><b>Type: </b>{{academyDetail.type.name}}</li>
+              <li><b>Created At: </b>{{academyDetail.createdAt | moment("DD-MM-YYYY h:mm A")}}</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="col-4 col-md-6 p4">
+          <div class="row">
+            <ul class="list-group">
+              <li><i class="fa fa-map-marker"></i> Location</li>
+              <li v-if="academyDetail.location" style="display: grid;">
+                <span><b> Type: </b>{{academyDetail.location.type}}</span>
+                <span><b> Name: </b>{{academyDetail.location.name}}</span>
+                <span><b> No: </b>{{academyDetail.location.houseNo}}</span>
+                <b style="font-weight: 300;"> Street
+                  {{academyDetail.location.street}} <br></b>
+                <b style="font-weight: 300;"> {{academyDetail.location.name}}
+                  <br></b>
+                <b style="font-weight: 300;">
+                  {{academyDetail.location.district.name}} <br></b>
+                <b style="font-weight: 300;">
+                  {{academyDetail.location.province.name}} <br></b>
+                <b style="font-weight: 300;">
+                  {{academyDetail.location.country.name}} </b>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="row mt12">
+        <div class="col-12 col-md-6 p4">
+          <div class="row">
+            <ul class="list-group">
+              <li><i class="fas fa-info-circle"></i> Info</li>
+              <li><b>Sub ID: </b>{{academyDetail.subId}}</li>
+              <li><b>Provider: </b>{{academyDetail.provider}}</li>
+              <li><b>Barista: </b>{{academyDetail.numberOfBarista}}</li>
+              <li><b>Total: </b>${{academyDetail.totalAmount}}</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div hidden class="row p4 mt12">
+        <ul class="list-group">
+          <li><i class="fas fa-edit"></i>Update Ticket</li>
+          <li>
+            <br>
+            <div class="split">
+              <div class="txt-title">
+                <span class="txt-danger" style="line-height: 31px;">*</span>
+                <span class="line-h31 font14">Description :</span>
+              </div>
+              <textarea v-model="academyDetail.text" type="text" placeholder="input description..."
+                class="input outline-dark desc"></textarea>
+            </div>
+
+            <div class="split">
+              <div class="txt-title">
+                <span class="txt-danger" style="line-height: 31px;">*</span>
+                <span class="line-h31 font14">Status :</span>
+              </div>
+              <select v-model="academyDetail.status" class="input input-xs mr6 filter-type">
+                <option value="pending">Pending</option>
+                <option value="closed">Closed</option>
+                <option value="open">Open</option>
+              </select>
+            </div>
+
+            <div class="mt20" style="display: flex;justify-content: flex-end;">
+              <button @click="goBack" class="btn btn-light-secondary mr8">
+                Cancel
+              </button>
+              <button v-if="!isUpdating" class="btn btn-light-info">
+                Update
+              </button>
+              <button v-else class="btn btn-light-info">Loading...</button>
+            </div>
+            <br>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

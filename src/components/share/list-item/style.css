@@ -1,0 +1,28 @@
+.container-search{
+    width: 100%;
+    height: 100%;
+    z-index: 99;
+    background-color: #f5f5f5fe;
+    border: 1px solid #cccccc;
+    border-radius: 6px;
+    position: relative;
+    padding: 5px;
+    margin-top: 2px;
+  }
+  .container-search li {
+    font-size: 12px;
+    list-style-type: none;
+    padding: 4px;
+    color: black;
+  
+  }
+  .container-search li:hover {
+    cursor: pointer;
+    background: #fdb432;
+    color:white;
+  }
+  .body-search{
+    width: 100%;
+    height: 100%; 
+    overflow-y: scroll
+  }

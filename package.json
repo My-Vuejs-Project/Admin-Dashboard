@@ -1,0 +1,48 @@
+{
+  "name": "my-app",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "lint": "vue-cli-service lint"
+  },
+  "dependencies": {
+    "@riophae/vue-treeselect": "^0.4.0",
+    "axios": "^0.21.4",
+    "chart.js": "^2.9.4",
+    "core-js": "^3.20.1",
+    "lodash": "^4.17.21",
+    "vue": "^2.6.14",
+    "vue-chartjs": "^3.5.1",
+    "vue-cookies": "^1.7.4",
+    "vue-moment": "^4.1.0",
+    "vue-multiple-progress": "^1.6.0",
+    "vue-multiselect": "^2.1.6",
+    "vue-router": "^3.5.2",
+    "vue-star-rating": "^1.7.0",
+    "vue-tel-input": "^4.4.2",
+    "vue-toasted": "^1.1.28",
+    "vue2-datepicker": "^3.10.4",
+    "vue2-editor": "2.0.42-images",
+    "vue2-google-maps": "^0.10.7",
+    "vue2-timepicker": "^1.1.6",
+    "vuetify": "^2.6.1",
+    "vuex": "^3.6.2",
+    "xlsx": "^0.17.4"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "^4.5.15",
+    "@vue/cli-service": "^4.5.15",
+    "sass": "^1.45.1",
+    "sass-loader": "^8.0.0",
+    "vue-cli-plugin-vuetify": "^2.4.5",
+    "vue-template-compiler": "^2.6.14",
+    "vuetify-loader": "^1.7.3"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead"
+  ]
+}

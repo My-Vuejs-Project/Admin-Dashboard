@@ -1,0 +1,62 @@
+.wrapper-container {
+    width: 100%;
+    min-height: 100vh;
+    position: relative;
+    padding: 72px 20px 20px 320px;
+}
+
+.margin-respon12 {
+    padding-top: 0px;
+}
+
+.text-responce {
+    right: 0px;
+    position: absolute;
+}
+
+.btn-create {
+    background-color: var(--dark);
+    color: #fff;
+    margin-right: 7px;
+    width: 170px;
+    font-weight: 600;
+    height: 32px;
+    border-radius: 4px;
+    font-size: 12px;
+}
+
+.btn-xs {
+    width: 72px;
+}
+
+tr.hover-list {
+    height: 50px;
+}
+
+.green {
+    color: green;
+}
+
+.red {
+    color: red;
+}
+
+a {
+    text-decoration: none;
+}
+
+@media screen and (max-width: 1200px) {
+    .pr12 {
+        padding: 0px
+    }
+
+    .margin-respon12 {
+        padding-top: 12px;
+    }
+}
+
+@media screen and (max-width:450px) {
+    .text-responce {
+        position: initial;
+    }
+}

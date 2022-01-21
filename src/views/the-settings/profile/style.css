@@ -1,0 +1,181 @@
+::-webkit-input-placeholder {
+  /* Edge */
+  font-size: 12px;
+}
+
+:-ms-input-placeholder {
+  /* Internet Explorer */
+  font-size: 12px;
+}
+
+::placeholder {
+  font-size: 12px;
+}
+
+input {
+  outline-style: none;
+  border-style: none;
+  width: 100%;
+  background: transparent;
+}
+
+.txt-title {
+  text-align: end;
+}
+.txt-image {
+  display: block;
+  align-self: center;
+}
+
+.disabled:hover {
+  border: 1px solid var(--secondary);
+  cursor: not-allowed;
+}
+
+.txt-danger {
+  margin-right: 6px;
+}
+
+.show-icon {
+  cursor: pointer;
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  color: var(--dark-light);
+  transform: translateY(-50%);
+  font-size: 14px;
+}
+
+select.input.outline-dark.text-12 {
+  height: 42px;
+}
+
+.container-wrap {
+  width: 75%;
+  margin: 0 auto;
+}
+.title {
+  margin-top: 20px;
+  font-weight: 600;
+  font-size: 18px;
+}
+.content {
+  margin: 10px 0;
+  border-top: 2px solid #fdb432;
+  border-bottom: 2px solid #fdb432;
+  padding: 20px 0;
+}
+
+hr {
+  width: 80%;
+
+  border: 1px solid #fdb432;
+}
+
+.split {
+  display: grid;
+  grid-template-columns: 25% auto;
+  gap: 40px;
+  margin-bottom: 35px;
+}
+.input-container {
+  border: 1px solid #cccccc;
+  border-radius: 6px;
+  padding: 4px 6px;
+  position: relative;
+}
+.disable-password {
+  display: flex;
+}
+.edit-password {
+  width: 160px;
+  cursor: pointer;
+  background: #efefef;
+  font-size: 12px;
+  color: #212529;
+  margin-left: 4px;
+  border-radius: 4px;
+  border: 1px solid #dedede;
+  z-index: 2;
+}
+span.no-file {
+  font-size: 12px;
+  margin: 0 10px;
+  color: #000;
+  font-weight: 500;
+}
+span.image-size {
+  font-size: 12px;
+  font-weight: 500;
+  color: #999999;
+}
+.media-exist {
+  display: flex;
+  background: #f8f8f8;
+}
+.btn-choose {
+  cursor: pointer;
+  background: #efefef;
+  font-size: 12px;
+  color: #212529;
+  padding: 3px 10px;
+  display: flex;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 3px;
+  border-radius: 4px;
+  border: 1px solid #dedede;
+  z-index: 2;
+}
+.block-preview {
+  width: 100%;
+  padding: 12px;
+  background: #f2f2f8;
+  border-radius: 4px;
+  display: flex;
+  flex-direction: row;
+}
+.p-img {
+  height: 50px;
+  width: 80px;
+  object-fit: contain;
+  border-radius: 2px;
+}
+.file-detail {
+  display: block;
+  align-self: center;
+}
+.p-file-name {
+  margin-bottom: 0px;
+  color: #fdb432;
+  font-size: 12px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 300px;
+}
+.container-wrap {
+  width: 75%;
+  margin: 0 auto;
+}
+@media screen and (max-width: 650px) {
+  .col-3,
+  .col-9 {
+    width: 100%;
+  }
+  .text-right-reponse {
+    text-align: start;
+  }
+}
+
+.label-selection {
+  margin-left: 24px;
+}
+.label-selection:first-child {
+  margin-left: 0;
+}
+.label-selection > label {
+  margin-left: 4px;
+  cursor: pointer;
+}

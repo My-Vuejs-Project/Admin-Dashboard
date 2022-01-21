@@ -1,0 +1,44 @@
+/* color */
+.txt-white{
+    color: var(--white);
+}
+.txt-black{
+    color: var(--black);
+}
+.txt-danger{
+    color: var(--danger);
+}
+.txt-secondary{
+    color: var(--secondary);
+}
+.txt-success{
+    color: var(--success);
+}
+.txt-warning{
+    color: var(--warning);
+}
+.txt-primary{
+    color: var(--primary);
+}
+.txt-info{
+    color: var(--info);
+}
+.txt-light-info{
+    color: var(--info-light);
+}
+.txt-select{
+    color: var(--select);
+}
+.txt-dark{
+    color: var(--text-dark)
+}
+.txt-dark-light{
+    color: var(--dark-light)
+}
+.txt-overlay{
+    color:var(--bg-overlay)
+}
+.hover:hover{
+    color: var(--select);
+}
+/* end color */

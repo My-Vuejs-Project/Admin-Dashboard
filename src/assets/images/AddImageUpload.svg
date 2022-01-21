@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 104.466 94.466">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #f0f2f5;
+      }
+
+      .cls-2 {
+        fill: #fff;
+        stroke: #c9ccd0;
+        stroke-width: 0.1px;
+      }
+
+      .cls-3 {
+        fill: #90949b;
+        stroke: #90949b;
+      }
+
+      .cls-4 {
+        fill: #f8f9fa;
+      }
+
+      .cls-5 {
+        stroke: none;
+      }
+
+      .cls-6 {
+        fill: none;
+      }
+    </style>
+  </defs>
+  <g id="Add_Image" data-name="Add Image" transform="translate(-11.187 -199.347)">
+    <rect id="Rectangle_659" data-name="Rectangle 659" class="cls-1" width="77" height="77" rx="3" transform="matrix(0.966, 0.259, -0.259, 0.966, 41.276, 199.347)"/>
+    <rect id="Rectangle_660" data-name="Rectangle 660" class="cls-1" width="77" height="77" rx="3" transform="matrix(0.995, -0.105, 0.105, 0.995, 11.187, 217.235)"/>
+    <g id="Rectangle_658" data-name="Rectangle 658" class="cls-2" transform="translate(21 209)">
+      <rect class="cls-5" width="77" height="77" rx="3"/>
+      <rect class="cls-6" x="0.05" y="0.05" width="76.9" height="76.9" rx="2.95"/>
+    </g>
+    <g id="Group_10847" data-name="Group 10847" transform="translate(0.76 -1.305)">
+      <rect id="Rectangle_662" data-name="Rectangle 662" class="cls-3" width="19" height="1.274" rx="0.637" transform="translate(59.377 239.305) rotate(90)"/>
+      <rect id="Rectangle_664" data-name="Rectangle 664" class="cls-3" width="19" height="1.274" rx="0.637" transform="translate(68.24 249.442) rotate(-180)"/>
+    </g>
+    <g id="Group_10846" data-name="Group 10846" transform="translate(32.263 226.583)">
+      <path id="Path_300" data-name="Path 300" class="cls-4" d="M77,64.524v-27c-3.617-2.425-10.422-6.173-15.676-6.173-7.579,0-14.47,15.065-22.824,15.065-6.46-.367-15.245-6.467-25.236-5.438C9.216,41.64,3.617,47.151,0,51.266V64.521m77,0" transform="translate(-11.263 -5.112)"/>
+      <circle id="Ellipse_3287" data-name="Ellipse 3287" class="cls-4" cx="7.679" cy="7.679" r="7.679" transform="translate(0.119 -3.383)"/>
+    </g>
+  </g>
+</svg>

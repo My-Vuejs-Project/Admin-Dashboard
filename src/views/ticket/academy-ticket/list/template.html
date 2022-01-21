@@ -1,0 +1,72 @@
+<div class="row">
+  <div class="row p6 radius6 animate-bottom">
+    <div class="row p12 bg-white border-top-light-blue">
+      <header class="navbar r-navbar">
+        <div class="ul-xl">
+          <div class="ul-xl-li">
+            Academy
+          </div>
+        </div>
+
+        <div class="con-search-btn" style="position: unset;">
+          <div class="input-container" style="width: 200px;">
+            <input @change="getAllAcademyTicket" v-model="search.accountId" type="text"
+              placeholder="input account Id..." />
+          </div>
+          <button @click="getAllAcademyTicket" class="btn btn-theme-grey-light btn-xs btn-create">
+            Search
+          </button>
+        </div>
+      </header>
+
+      <div class="table-control p12">
+        <table class="table wh800" cellspacing="0">
+          <thead>
+            <tr>
+              <th>No</th>
+              <th>Profile</th>
+              <th>Name</th>
+              <th>Type</th>
+              <th>Location</th>
+              <th>Status</th>
+              <th v-if="checkoutPermission('UPDATE_ACADEMY_TICKET_STATUS')" style="text-align: center;width: 100px;">
+                Action</th>
+            </tr>
+          </thead>
+          <tbody v-if="!isFetching && checkoutPermission('LIST_ACADEMY_TICKET')">
+            <tr v-for="(academyTicket,index) in data.academyTicket" :key="(academyTicket,index)" class="hover-list">
+              <td>{{index+1}}</td>
+              <td>
+                <img v-if="academyTicket.account && academyTicket.account.imageUrl"
+                  :src="getFullImage(academyTicket.account.imageUrl)"
+                  style="height: 40px;width: 40px; object-fit: cover;" />
+                <img v-else :src="require('@/assets/images/user_default.jpeg')"
+                  style="height: 40px;width: 40px; object-fit: cover;" />
+              </td>
+              <td v-if="academyTicket.account">{{academyTicket.account.firstName}} {{academyTicket.account.lastName}}
+              </td>
+              <td>{{academyTicket.type.name}}</td>
+              <td>{{academyTicket.locationType}}</td>
+              <td style="text-transform: capitalize">{{academyTicket.status}}</td>
+              <td class="tr-right">
+                <router-link v-if="checkoutPermission('UPDATE_ACADEMY_TICKET_STATUS')"
+                  :to="{name : 'EditAcademyTicket', query: {id:academyTicket.id}}"
+                  class="btn btn-light-info btn-xs mr5">
+                  View
+                </router-link>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <TableLoading v-if="isFetching" />
+        <NoItem v-if="isNoData" />
+      </div>
+      <div class="total ph12">
+        <div class="ul-xl-li go-left">
+          Total : {{data.pagination.total}}
+        </div>
+        <Pagination v-if="data.pagination.totalPage > 0" :pagination="data.pagination.totalPage" />
+      </div>
+    </div>
+  </div>
+</div>

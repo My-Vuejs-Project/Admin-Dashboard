@@ -1,0 +1,106 @@
+<div class="row">
+  <div class="row p6 radius6 animate-bottom">
+    <div class="row p12 bg-white border-top-light-blue">
+      <header class="navbar r-navbar">
+        <div class="ul-xl">
+          <div class="ul-xl-li">
+            Type
+          </div>
+        </div>
+        <select v-model="search.type" @change="getAllTicketType(true)" class="input input-xs mr6 filter-type">
+          <option value="service"> Service </option>
+          <option value="academy"> Academy </option>
+          <option value="training"> Training </option>
+        </select>
+        <select v-model="search.status" @change="getAllTicketType" class="input input-xs mr6 filter-type">
+          <option value="" class="option-all">All Status</option>
+          <option value="active"> Active </option>
+          <option value="inactive"> Inactive </option>
+        </select>
+        <div class="con-search-btn" style="position: unset;">
+          <router-link v-if="checkoutPermission('CREATE_TICKET_TYPE')" :to="{name : 'CreateTicketType'}"
+            class="btn btn-theme-grey-light btn-create" style="margin-right: 0;">
+            + Create Type
+          </router-link>
+        </div>
+      </header>
+
+      <div class="table-control p12">
+        <table class="table wh800" cellspacing="0">
+          <thead>
+            <tr>
+              <th>No</th>
+              <th>Image</th>
+              <th>Name</th>
+              <th>Description</th>
+              <th>Price</th>
+              <th>Sort Order</th>
+              <th>Status</th>
+              <th v-if="checkoutPermission('UPDATE_TICKET_TYPE') || checkoutPermission('DELETE_TICKET_TYPE')"
+                style="text-align: center;width: 100px;">Action
+              </th>
+            </tr>
+          </thead>
+          <tbody v-if="!isFetching && (checkoutPermission('LIST_SERVICE_TICKET_TYPE') || checkoutPermission('LIST_ACADEMY_TICKET_TYPE'))">
+            <tr v-for="(ticketType,index) in data.ticketTypes" :key="(ticketType,index)" class="hover-list">
+              <td>{{index+1}}</td>
+              <td>
+                <img v-if="ticketType.imageUrl" :src="getFullImage(ticketType.imageUrl)"
+                  style="height: 36px;width: 60px;object-fit: cover;" />
+                <img v-else :src="require('@/assets/images/noImage.jpg')" alt="No Image" style="height: 40px;" />
+              </td>
+              <td>{{ticketType.name}}</td>
+              <td>{{ticketType.shortDescription}}</td>
+              <td>{{ticketType.price}} $</td>
+              <td>{{ticketType.sortOrder}}</td>
+              <td>
+                <span v-if="ticketType.status == 'active'" class="txt-success">Active</span>
+                <span v-else class="txt-danger">Inactive</span>
+              </td>
+              <td class="tr-right">
+                <router-link v-if="checkoutPermission('UPDATE_TICKET_TYPE')"
+                  :to="{name : 'EditTicketType', params: {ticketType}, query: {id:ticketType.id, type: ticketType.type}}"
+                  class="btn btn-light-info btn-xs mr5">
+                  Update
+                </router-link>
+                <button v-if="checkoutPermission('DELETE_TICKET_TYPE')" @click="popupModalDelete(index)"
+                  class="btn btn-light-dark btn-xs">
+                  Delete
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <TableLoading v-if="isFetching" />
+        <NoItem v-if="data.ticketTypes.length < 1 && !isFetching" />
+      </div>
+    </div>
+  </div>
+
+  <div v-if="display.modal.delete.show" class="overlay">
+    <div @click="closeModal" class="overlay"></div>
+    <div class="modal-md">
+      <div class="modal-header border-bottom txt-info">
+        <span class="txt-sm">Delete</span>
+      </div>
+      <div class="modal-body" style="overflow-y: hidden; padding: 16px;">
+        <span>Do you want to delete this record?</span>
+      </div>
+      <div class="modal-footer border-top">
+        <button v-if="!isDeleting" @click="deleteTicketType" class="btn btn-light-info btn-xs go-right">
+          Yes
+        </button>
+        <button v-else class="btn btn-light-info btn-xs go-right">
+          Loading...
+        </button>
+
+        <button v-if="!isDeleting" @click="closeModal" class="btn btn-light-secondary btn-xs mr12 go-right">
+          No
+        </button>
+        <button v-else class="btn btn-light-secondary btn-xs mr12 go-right">
+          No
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

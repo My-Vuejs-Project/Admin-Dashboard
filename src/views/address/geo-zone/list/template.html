@@ -1,0 +1,85 @@
+<div class="row">
+  <div class="row p6 radius6 animate-bottom">
+    <div class="row p12 bg-white border-top-light-blue">
+      <header class="navbar r-navbar">
+        <div class="ul-xl">
+          <div class="ul-xl-li">
+            Geo Zone
+          </div>
+        </div>
+
+        <div class="con-search-btn" style="position: unset;">
+          <router-link v-if="checkoutPermission('CREATE_GEO_ZONE')" :to="{name : 'CreateGeoZone'}"
+            class="btn btn-theme-grey-light btn-create" style="margin-right: 0;">
+            + Create Geo Zone
+          </router-link>
+        </div>
+      </header>
+
+      <div class="table-control p12">
+        <table class="table wh800" cellspacing="0">
+          <thead>
+            <tr>
+              <th>No</th>
+              <th>Name</th>
+              <th>Description</th>
+              <th>Shipping Price</th>
+              <th v-if="checkoutPermission('UPDATE_GEO_ZONE') || checkoutPermission('DELETE_GEO_ZONE')"
+                style="text-align: center;width: 100px;">Action</th>
+            </tr>
+          </thead>
+          <tbody v-if="!isFetching && checkoutPermission('LIST_GEO_ZONE')">
+            <tr v-for="(geoZone, index) in data.geoZone" :key="(geoZone, index)" class="hover-list">
+              <td>{{index+1}}</td>
+              <td>{{geoZone.name}}</td>
+              <td>{{geoZone.description}}</td>
+              <td>{{geoZone.shippingPrice}}</td>
+              <td class="tr-right">
+                <router-link v-if="checkoutPermission('UPDATE_GEO_ZONE')"
+                  :to="{name : 'EditGeoZone', query: {id:geoZone.id}}" class="btn btn-light-info btn-xs mr5">
+                  Update
+                </router-link>
+                <button v-if="checkoutPermission('DELETE_GEO_ZONE')" @click="popupModal(index)"
+                  class="btn btn-light-dark btn-xs">
+                  Delete
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <TableLoading v-if="isFetching" />
+        <NoItem v-if="isNoData" />
+      </div>
+      <div class="total ph12">
+        <div class="ul-xl-li go-left">
+          Total : {{data.pagination.total}}
+        </div>
+        <Pagination v-if="data.pagination.totalPage > 0" :pagination="data.pagination.totalPage" />
+      </div>
+    </div>
+  </div>
+
+  <div v-if="display.modal.delete.show" class="overlay">
+    <div @click="closeModal" class="overlay"></div>
+    <div class="modal-md">
+      <div class="modal-header border-bottom txt-info">
+        <span class="txt-sm">Delete</span>
+      </div>
+      <div class="modal-body" style="overflow-y: hidden; padding: 16px;">
+        <span>Do you want to delete this record?</span>
+      </div>
+      <div class="modal-footer border-top">
+        <button v-if="!isDeleting" @click="deleteGeoZone" class="btn btn-light-info btn-xs go-right">
+          Yes
+        </button>
+        <button v-else class="btn btn-light-info btn-xs go-right">
+          Loading...
+        </button>
+        <button @click="closeModal" class="btn btn-light-secondary btn-xs mr12 go-right">
+          No
+        </button>
+      </div>
+    </div>
+
+  </div>
+</div>

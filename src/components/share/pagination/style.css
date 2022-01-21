@@ -1,0 +1,51 @@
+body {
+  overflow: hidden !important;
+}
+.body-btn-pagination {
+  position: absolute;
+  right: 20px;
+}
+.body-total-page {
+  position: absolute;
+  left: 25px;
+}
+input[type='number']::-webkit-inner-spin-button {
+  opacity: 1;
+}
+
+.btn-responsive {
+  display: flex;
+}
+
+@media screen and (max-width: 1024px) {
+  .col-10 {
+    width: 100%;
+  }
+}
+@media screen and (max-width: 650px) {
+  .col-4 {
+    width: 100%;
+  }
+}
+@media screen and (max-width: 512px) {
+  .pagination {
+    display: block;
+  }
+  .body-total-page {
+    width: 100%;
+    position: relative;
+    margin-bottom: 12px;
+  }
+  .btn-responsive {
+    width: 100%;
+    position: relative;
+    justify-content: center;
+  }
+}
+
+@media screen and (max-width: 375px) {
+  .btn-responsive {
+    display: grid;
+    gap: 6px;
+  }
+}

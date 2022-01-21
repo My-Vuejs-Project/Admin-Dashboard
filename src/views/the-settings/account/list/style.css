@@ -1,0 +1,204 @@
+td {
+  height: 45px;
+}
+.ul-xl {
+  width: 100%;
+  display: inline-flex;
+  align-items: center;
+  font-weight: 600;
+}
+input[type='date']::-webkit-inner-spin-button,
+input[type='date']::-webkit-calendar-picker-indicator {
+  margin: 0;
+}
+input[type='date'] {
+  width: 120px;
+  height: 30px;
+  border-radius: 4px;
+  border: 1px solid #ddd;
+  font-size: 11px;
+  padding-right: 3px;
+  margin: 0 6px;
+  color: #7e7e7e;
+  text-align: center;
+  -webkit-appearance: textfield;
+  -moz-appearance: textfield;
+  min-height: 30px;
+  background-color: #fff;
+}
+input[type='date']:focus {
+  outline: none;
+}
+.filter {
+  font-size: 12px;
+  display: flex;
+  -moz-text-align-last: right;
+  align-items: center;
+}
+.filter span {
+  font-weight: 600;
+}
+.tr-left.profile img {
+  width: 30px;
+  height: 30px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+.table-name {
+  padding-left: 42px;
+}
+
+.red {
+  color: red;
+}
+.delete-btn {
+  margin: 0 5px;
+}
+.search-box {
+  min-width: 150px;
+  background-color: #fff;
+  padding: 6px;
+  height: 34px;
+  display: flex;
+  align-self: center;
+  border-radius: 4px;
+  border: 1px solid #ddd;
+}
+.filter-type {
+  width: 200px;
+  padding: 6px;
+}
+.filter-type.role{
+  width: 300px;
+}
+.btn-create {
+  background-color: var(--dark);
+  color: #fff;
+  margin-right: 7px;
+  width: 170px;
+  font-weight: 600;
+  height: 32px;
+  border-radius: 4px;
+  font-size: 12px;
+}
+
+.active-btn{
+  width: 70px;
+}
+.total {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 12px;
+}
+
+header.navbar.r-navbar.mobile {
+  display: none;
+}
+
+.con-search-btn.mobile {
+  display: none;
+}
+
+.btn-xs {
+  width: 72px;
+}
+
+@media screen and (max-width: 900px) {
+  .search-box {
+    width: 250px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  header.navbar.r-navbar.mobile {
+    display: flex;
+    margin-top: 12px;
+  }
+
+  .filter.mobile,
+  .search-box.mobile {
+    display: flex;
+  }
+
+  .btn-create {
+    width: 300px;
+  }
+
+  .filter-date {
+    display: flex;
+    align-items: center;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  header.navbar.r-navbar.mobile {
+    display: block;
+  }
+
+  .con-search-btn {
+    display: none;
+  }
+
+  .con-search-btn.mobile {
+    display: flex;
+  }
+
+  .btn-create {
+    width: 100%;
+  }
+
+  .search-box.mobile {
+    width: 100%;
+    margin: 0 6px;
+  }
+
+  .filter.mobile {
+    margin-top: 12px;
+    margin: 12px 6px 0;
+    justify-content: space-between;
+  }
+
+  .filter-date {
+    width: 50%;
+  }
+
+  input#startDate,
+  input#endDate {
+    width: 100%;
+  }
+
+  input#endDate {
+    margin-right: 0;
+  }
+
+  .modal-md {
+    width: 85%;
+  }
+
+  .total {
+    display: block;
+    text-align: center;
+  }
+}
+
+@media screen and (max-width: 375px) {
+  .filter.mobile {
+    display: block;
+  }
+
+  .filter-date {
+    width: 100%;
+  }
+
+  .filter-date.start {
+    margin-bottom: 12px;
+  }
+
+  .filter-date span {
+    width: 33px;
+  }
+
+  input#startDate {
+    margin-right: 0;
+  }
+}

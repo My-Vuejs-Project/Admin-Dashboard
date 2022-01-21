@@ -1,0 +1,138 @@
+<div class="row p6 radius6 animate-bottom">
+  <div v-if="imagePreview" class="overlay">
+    <div @click="closeModal" class="overlay"></div>
+    <div class="modal">
+      <img :src="getFullImage(serviceDetail.media[imagePreviewIndex].url)" class="attachment mr6" />
+    </div>
+  </div>
+
+  <div class="row bg-white border-top-light-blue">
+    <div class="font18" style="font-weight: 600 !important; margin: 0px 4px 0px 4px">
+      <i @click="goBack" class="fas fa-arrow-left pointer" title="Back" style="margin-right: 18px;cursor: pointer;"></i>
+      Service Ticket Details
+      <hr>
+    </div>
+
+    <div class="container-wrap">
+      <div class="row">
+        <div class="col-4 col-md-6 p4">
+          <div class="row">
+            <ul class="list-group">
+              <li><i class="fas fa-user"></i> Contact</li>
+              <li v-if="serviceDetail.account" class="profile" style="text-transform: capitalize;">
+                <img :src="getFullImage(serviceDetail.account.imageUrl)" alt=""> {{serviceDetail.account.firstName + ' '
+                + serviceDetail.account.lastName}}
+              </li>
+              <li style="text-transform: capitalize;"><i class="fas fa-user"></i>{{serviceDetail.contactPerson}}</li>
+              <li><i class="fa fa-phone color-999"></i>{{serviceDetail.contactPhone}}</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="col-4 col-md-6 p4">
+          <div class="row">
+            <ul class="list-group">
+              <li><i class="fa fa-shopping-cart"></i> Request Details</li>
+              <li v-if="serviceDetail.type"><b>Type: </b>{{serviceDetail.type.name}}</li>
+              <li><b>Remark: </b>{{serviceDetail.remarks}}</li>
+              <li v-if="serviceDetail.media"><b class="mr8">Media:</b>
+                <img v-for="(image, index) in serviceDetail.media" :key="index" :src="getFullImage(image.url)"
+                  width="40px" @click="preview(index)" class="pointer">
+              </li>
+              <li><b>Created At: </b>{{serviceDetail.createdAt | moment("DD-MM-YYYY h:mm A")}}</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="col-4 col-md-6 p4">
+          <div class="row">
+            <ul class="list-group">
+              <li><i class="fas fa-box"></i> Equipment</li>
+              <li v-if="serviceDetail.equipment"><b>Product: </b>{{serviceDetail.equipment.product.name}}</li>
+              <li v-if="serviceDetail.equipment"><b>Brand: </b>{{serviceDetail.equipment.brand.name}}</li>
+              <li v-if="serviceDetail.equipment"><b>Category: </b>{{serviceDetail.equipment.category.name}}</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="row mt12">
+        <div class="col-6 col-md-6 p4">
+          <div class="row">
+            <ul class="list-group">
+              <li><i class="fas fa-info-circle"></i> Info</li>
+              <li><b>Sub ID: </b>{{serviceDetail.subId}}</li>
+              <li><b>Provider: </b>{{serviceDetail.provider}}</li>
+              <li><b>Problem Type: </b>{{serviceDetail.problemType}}</li>
+              <li><b>Tech Name: </b>{{serviceDetail.techName}}</li>
+              <li><b>Total: </b>${{serviceDetail.totalAmount}}</li>
+            </ul>
+          </div>
+        </div>
+        
+        <div class="col-6 col-md-6 p4">
+          <div class="row">
+            <ul class="list-group">
+              <li><i class="fa fa-map-marker"></i> Location</li>
+              <li v-if="serviceDetail.location" style="display: grid;">
+                <span><b> Type: </b>{{serviceDetail.location.type}}</span>
+                <span><b> Name: </b>{{serviceDetail.location.name}}</span>
+                <span><b> No: </b>{{serviceDetail.location.houseNo}}</span>
+                <b style="font-weight: 300;"> Street
+                  {{serviceDetail.location.street}} <br></b>
+                <b style="font-weight: 300;"> {{serviceDetail.location.name}}
+                  <br></b>
+                <b style="font-weight: 300;">
+                  {{serviceDetail.location.district.name}} <br></b>
+                <b style="font-weight: 300;">
+                  {{serviceDetail.location.province.name}} <br></b>
+                <b style="font-weight: 300;">
+                  {{serviceDetail.location.country.name}} </b>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div hidden class="row p4 mt12">
+        <ul class="list-group">
+          <li><i class="fas fa-edit"></i>Update Ticket</li>
+          <li>
+            <br>
+            <div class="split">
+              <div class="txt-title">
+                <span class="txt-danger" style="line-height: 31px;">*</span>
+                <span class="line-h31 font14">Description :</span>
+              </div>
+              <textarea v-model="serviceDetail.text" type="text" placeholder="input description..."
+                class="input outline-dark desc"></textarea>
+            </div>
+
+            <div class="split">
+              <div class="txt-title">
+                <span class="txt-danger" style="line-height: 31px;">*</span>
+                <span class="line-h31 font14">Status :</span>
+              </div>
+              <select v-model="serviceDetail.status" class="input input-xs mr6 filter-type">
+                <option value="pending">Pending</option>
+                <option value="closed">Closed</option>
+                <option value="open">Open</option>
+              </select>
+            </div>
+
+            <div class="mt20" style="display: flex;justify-content: flex-end;">
+              <button @click="goBack" class="btn btn-light-secondary mr8">
+                Cancel
+              </button>
+              <button v-if="!isUpdating" class="btn btn-light-info">
+                Update
+              </button>
+              <button v-else class="btn btn-light-info">Loading...</button>
+            </div>
+            <br>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

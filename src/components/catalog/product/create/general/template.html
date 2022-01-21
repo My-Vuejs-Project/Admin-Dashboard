@@ -1,0 +1,282 @@
+<div class="container">
+  <div class="row">
+    <div class="col-12 pr12">
+      <div class="row animate-bottom">
+        <div class="row bg-white pv24 radius6">
+          <div class="col-6 pr6">
+            <div class="row">
+              <div class="col-12 p6">
+                <p class="mt0 mb6"><span class="txt-danger" style="line-height: 31px;">*</span> Name:</p>
+                <input v-model="body.name" type="text" placeholder="Name" class="input outline-dark" />
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-12 p6">
+                <p class="mt0 mb6"><span class="txt-danger" style="line-height: 31px;">*</span> Short Description:</p>
+                <textarea v-model="body.shortDescription" type="text" placeholder="Short description..."
+                  class="input outline-dark desc"></textarea>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-12 p6">
+                <p class="mt0 mb6">Description:</p>
+                <vue-editor id="editor" :editor-toolbar="customToolbar" v-model="body.description" useCustomImageHandler
+                  @imageAdded="handleImageAdded" style="height: 250px;">
+                </vue-editor>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-12 p6">
+                <p class="mt0 mb6">Specification:</p>
+                <input v-model="body.specification" type="text" placeholder="input specification..."
+                  class="input outline-dark" />
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-12 p6">
+                <p class="mt0 mb6"><span class="txt-danger" style="line-height: 31px;">*</span> SKU:</p>
+                <input v-model="body.sku" type="text" placeholder="S-000-001" class="input outline-dark"
+                  title="SKU must be unique" />
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-12 p6">
+                <p class="mt0 mb6"><span class="txt-danger" style="line-height: 31px;">*</span> Code:</p>
+                <input v-model="body.code" type="text" placeholder="C-000-001" class="input outline-dark"
+                  title="Code must be unique" />
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-12 p6">
+                <p class="mt0 mb6">Point:</p>
+                <input v-model.number="body.points" type="text" placeholder="input point..."
+                  class="input outline-dark" />
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-12 p6">
+                <p class="mt0 mb6"><span class="txt-danger" style="line-height: 31px;">*</span> Tax:</p>
+                <input v-model.number="body.tax" type="text" placeholder="input tax..." class="input outline-dark" />
+              </div>
+            </div>
+          </div>
+
+          <div class="col-6 pl6">
+            <div class="row">
+              <div class="row">
+                <div class="col-12 p6">
+                  <p class="mt0 mb6"><span class="txt-danger" style="line-height: 31px;">*</span> Image:</p>
+                  <div class="media-container" style="position: relative;">
+                    <div
+                      style="width: 100%;border-radius: 4px;border:1px solid #ccc;padding:3px;display: inline-block;">
+                      <div v-if="body.imageUrl && Object.keys(body.imageUrl).length != 0"
+                        class="go-left pointer display-flex">
+                        <img :src="getFullImage(body.imageUrl)" height="35px" class="attachment mr6" />
+                        <div class="p-file-name">
+                          <span class="font12 p-file-name mr6"
+                            style="line-height: 35px;">{{getNameFromUrl(body.imageUrl)}}</span>
+                        </div>
+                      </div>
+
+                      <div v-else class="go-left">
+                        <img :src="require('@/assets/icons/Vectorpaperclip.png')" width="8px" class="attachment mh6" />
+                        <span class="font12" style="line-height: 35px;">No file selected</span>
+                      </div>
+
+                      <label @click="chooseImage('single')" id="image"
+                        class="btn btn-secondary btn-sm go-right mt2 mr2">
+                        Choose file
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-12 p6">
+                  <p class="mt0 mb6"><span class="txt-danger" style="line-height: 31px;">*</span> Additional Image:</p>
+                  <div class="media-container" style="position: relative;">
+                    <div
+                      style="width: 100%;border-radius: 4px;border:1px solid #ccc;padding:3px;display: inline-block;">
+                      <div v-if="data.mediaList && Object.keys(data.mediaList).length != 0"
+                        class="go-left pointer display-flex">
+                        <div v-for="(media, index) in data.mediaList" :key="(media, index)">
+                          <img :src="getFullImage(media.url)" height="35px" class="attachment mr6" />
+                        </div>
+                      </div>
+
+                      <div v-else class="go-left">
+                        <img :src="require('@/assets/icons/Vectorpaperclip.png')" width="8px" class="attachment mh6" />
+                        <span class="font12" style="line-height: 35px;">No file selected</span>
+                      </div>
+
+                      <label @click="chooseImage('multitple')" id="image"
+                        class="btn btn-secondary btn-sm go-right mt2 mr2">
+                        Choose file
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-12 p6">
+                  <p class="mt0 mb6"><span class="txt-danger" style="line-height: 31px;">*</span> Category:</p>
+                  <select v-model.number="body.categoryId" class="input outline-dark" @change="getBrands">
+                    <optgroup v-for="(category, index) in data.categories" :key="index" :label="category.name">
+                      <option v-for="(subcategory, index) in category.children" :key="index" :value="subcategory.id"
+                        >
+                        {{toCapitalLetter(subcategory.name)}}</option>
+                    </optgroup>
+                  </select>
+                </div>
+              </div>
+
+              <div class="row" v-if="data.brands.length > 0">
+                <div class="col-12 p6">
+                  <p class="mt0 mb6"><span class="txt-danger" style="line-height: 31px;">*</span> Brand:</p>
+                  <select v-model="body.brandId" class="input outline-dark">
+                    <option disabled>Select Brand</option>
+                    <option v-for="(brand,index) in data.brands" :key="(brand,index)" :value="brand.id">{{brand.name}}
+                    </option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-12 p6">
+                  <p class="mt0 mb6"><span class="txt-danger" style="line-height: 31px;">*</span> Currency:</p>
+                  <select v-model="body.currency" class="input outline-dark">
+                    <option v-for="(currency, index) in data.currencies" :key="(currency, index)"
+                      :value="currency.code">{{currency.name}}</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-12 p6">
+                  <p class="mt0 mb6"><span class="txt-danger" style="line-height: 31px;">*</span> Price:</p>
+                  <input v-model.number="body.price" type="text" placeholder="input price..."
+                    class="input outline-dark" />
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-12 p6">
+                  <p class="mt0 mb6"><span class="txt-danger" style="line-height: 31px;">*</span> Unit of Measurement:</p>
+                  <select v-model="body.uomId" class="input outline-dark">
+                    <option v-for="(uom, index) in data.uom" :key="(uom, index)"
+                      :value="uom.id">{{uom.name}}</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-12 p6">
+                  <p class="mt0 mb6"><span class="txt-danger" style="line-height: 31px;">*</span> Quantity:</p>
+                  <input v-model.number="body.quantity" type="text" placeholder="input quantity..."
+                    class="input outline-dark" />
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-12 p6">
+                  <p class="mt0 mb6"><span class="txt-danger" style="line-height: 31px;">*</span> Shipping:</p>
+                  <div class="select">
+                    <div class="radio-item">
+                      <input type="radio" id="true" v-model="body.shipping" :value="true" />
+                      <label for="true">Yes</label>
+                    </div>
+
+                    <div class="radio-item">
+                      <input type="radio" id="false" v-model="body.shipping" :value="false" />
+                      <label for="false">No</label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-12 p6">
+                  <p class="mt0 mb6">Related Product:</p>
+
+                  <multiselect v-model.number="body.relatedProduct" placeholder="Search" label="name" track-by="id"
+                    :options="data.productList" :multiple="true" :taggable="true"></multiselect>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-12 p6">
+                  <p class="mt0 mb6"><span class="txt-danger" style="line-height: 31px;">*</span> Status:</p>
+                  <div class="select">
+                    <div class="radio-item">
+                      <input type="radio" id="active" v-model="body.status" value="active" />
+                      <label for="active">Active</label>
+                    </div>
+
+                    <div class="radio-item">
+                      <input type="radio" id="inactive" v-model="body.status" value="inactive" />
+                      <label for="inactive">Inactive</label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div v-if="update" class="row">
+                <div class="col-12 p6">
+                  <button v-if="loading.isUpdating" class="btn btn-md btn-light-info go-right">
+                    Processing...
+                  </button>
+                  <button v-else @click="submitCreate" class="btn btn-md btn-light-info go-right">
+                    Update
+                  </button>
+                </div>
+              </div>
+
+              <div v-else class="row">
+                <div class="col-12 p6">
+                  <button v-if="loading.isCreating" class="btn btn-md btn-light-info go-right">
+                    Processing...
+                  </button>
+                  <button v-else @click="submitCreate" class="btn btn-md btn-light-info go-right">
+                    Submit
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div v-if="display.imagePreview" class="overlay">
+          <div @click="closeModal" class="overlay"></div>
+          <div class="modal">
+            <img :src="getFullImage(data.media.url)" class="attachment mr6" />
+          </div>
+        </div>
+
+        <div v-if="display.media.single" class="overlay">
+          <div @click="closeModal" class="overlay"></div>
+          <div class="modal-md">
+            <Media type="single" :method="closeModal" folder="catelog" @existedMedia="existedMediaCallback">
+            </Media>
+          </div>
+        </div>
+
+        <div v-else-if="display.media.multiple" class="overlay">
+          <div @click="closeModal" class="overlay"></div>
+          <div class="modal-md">
+            <Media type="multiple" :method="closeModal" folder="catelog" @existedMultiMedia="existedMultiMediaCallback">
+            </Media>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

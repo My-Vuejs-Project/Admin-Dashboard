@@ -1,0 +1,146 @@
+<div class="row p6 radius6 animate-bottom">
+  <div class="row bg-white border-top-light-blue">
+    <div class="container-wrap">
+      <div class="title">
+        Your Profile
+      </div>
+
+      <div class="content">
+        <div class="split">
+          <div class="txt-title txt-image">
+            <span class="line-h31">Image :</span>
+          </div>
+
+          <div class="media-container" style="position: relative;">
+            <div style="width: 100%;border-radius: 4px;border:1px solid #ccc;padding:3px;display: inline-block;">
+              <div v-if="body.image.file" class="go-left">
+                <img :src="fileToPath(body.image.file)" height="35px" class="attachment mr6" />
+                <span class="font12 p-file-name mr6" style="line-height: 35px;">{{body.image.file.name}}</span>
+                <span class="font12" style="line-height: 35px;">( {{body.image.file.size/1000}} KB )</span>
+              </div>
+
+              <div v-else-if="profile && profile.imageUrl" class="go-left pointer" style="display: flex;">
+                <img v-if="profile.imageUrl" :src="getFullImage(profile.imageUrl)" height="35px"
+                  class="attachment mr6" />
+                <img v-else :src="require('@/assets/images/noImage.jpg')" alt="No Image" style="height: 40px;" />
+                <div class="p-file-name">
+                  <span class="font12 p-file-name mr6"
+                    style="line-height: 35px;">{{getNameFromUrl(profile.imageUrl)}}</span>
+                </div>
+              </div>
+
+              <div v-else class="go-left">
+                <img :src="require('@/assets/icons/Vectorpaperclip.png')" width="8px" class="attachment mh6" />
+                <span class="font12" style="line-height: 35px;">No file selected( 500 x 750px )</span>
+              </div>
+
+              <label :for="'chooseImage'" class="btn btn-secondary btn-sm go-right mt2 mr2">
+                Choose file
+              </label>
+            </div>
+
+            <input @change="chooseImage($event)" hidden type="file" :id="'chooseImage'" :ref="'chooseImage'"
+              accept="image/*" />
+          </div>
+        </div>
+
+        <div class="split">
+          <div class="txt-title">
+            <span class="txt-danger" style="line-height: 31px;">*</span>
+            <span class="line-h31">First Name :</span>
+          </div>
+
+          <div class="input-container">
+            <input id="firstName" v-model="profile.firstName" type="text" placeholder="input first name..."
+              style="cursor: not-allowed;" disabled="true" />
+            <button class="btn-choose" @click="enableEdit('firstName')" title="Edit First Name">
+              Edit
+            </button>
+          </div>
+        </div>
+
+        <div class="split">
+          <div class="txt-title">
+            <span class="txt-danger" style="line-height: 31px;">*</span>
+            <span class="line-h31">Last Name :</span>
+          </div>
+
+          <div class="input-container">
+            <input id="lastName" v-model="profile.lastName" type="text" placeholder="input last name..."
+              style="cursor: not-allowed;" disabled />
+            <button class="btn-choose" @click="enableEdit('lastName')" title="Edit Last Name">
+              Edit
+            </button>
+          </div>
+        </div>
+
+        <div class="split">
+          <div class="txt-title">
+            <span class="txt-danger" style="line-height: 31px;">*</span>
+            <span class="line-h31">Email :</span>
+          </div>
+
+          <div class="input-container">
+            <input id="email" v-model="profile.email" type="email" placeholder="input email..."
+              style="cursor: not-allowed;" disabled />
+            <button class="btn-choose" @click="enableEdit('email')" title="Edit Email">
+              Edit
+            </button>
+          </div>
+        </div>
+
+        <div class="split" v-if="!body.password.isEditable" style="margin-bottom: 0;">
+          <div class="txt-title">
+            <span class="line-h31">Password :</span>
+          </div>
+
+          <div class="disable-password">
+            <input style="cursor: not-allowed;" class="input-container password" value="1234567890" type="password"
+              autocomplete="new-password" disabled />
+            <button class="edit-password" @click="enableEdit('password')" title="Edit Your Password">
+              Edit Password
+            </button>
+          </div>
+        </div>
+
+        <div v-if="body.password.isEditable">
+          <div class="split">
+            <div class="txt-title">
+              <span class="txt-danger" style="line-height: 31px;">*</span>
+              <span class="line-h31">Old Password :</span>
+            </div>
+
+            <div class="input-container">
+              <input class="password" v-model="body.password.currentPassword" :type="show.current ? 'text' : 'password'"
+                placeholder="Enter Old Password" autocomplete="new-password" />
+              <i class="fas fa-eye show-icon" v-if="show.current" @click="show.current = !show.current"></i>
+              <i class="fas fa-eye-slash show-icon" v-else @click="show.current = !show.current"></i>
+            </div>
+          </div>
+
+          <div class="split" style="margin-bottom: 0;">
+            <div class="txt-title">
+              <span class="txt-danger" style="line-height: 31px;">*</span>
+              <span class="line-h31">New Password :</span>
+            </div>
+
+            <div class="input-container">
+              <input class="password" v-model="body.password.newPassword" :type="show.new ? 'text' : 'password'"
+                placeholder="Enter New Password" autocomplete="new-password" />
+              <i class="fas fa-eye show-icon" v-if="show.new" @click="show.new = !show.new"></i>
+              <i class="fas fa-eye-slash show-icon" v-else @click="show.new = !show.new"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style="display: flex;justify-content: flex-end; margin: 16px 0;">
+        <button v-if="!body.account.isUpdating" @click="submitUpdateProfile" class="btn btn-light-info"
+          title="Update Your Information" style="width: 100px;">
+          Update
+        </button>
+        <button v-else class="btn btn-light-info">Loading...</button>
+      </div>
+    </div>
+  </div>
+</div>

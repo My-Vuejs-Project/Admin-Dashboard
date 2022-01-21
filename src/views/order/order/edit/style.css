@@ -1,0 +1,123 @@
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+::-webkit-input-placeholder {
+  /* Edge */
+  font-size: 12px;
+}
+
+:-ms-input-placeholder {
+  /* Internet Explorer */
+  font-size: 12px;
+}
+
+::placeholder {
+  font-size: 12px;
+}
+
+input {
+  outline-style: none;
+  border-style: none;
+  width: 100%;
+}
+
+.btn {
+  z-index: 2;
+}
+
+.txt-title {
+  text-align: end;
+}
+
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+select.input.outline-dark {
+  height: 42px;
+}
+
+.txt-danger {
+  margin-right: 6px;
+}
+
+.group-view {
+  background: #ebebeb;
+  width: 100%;
+  height: auto;
+  margin-bottom: 15px;
+  padding: 4px;
+}
+
+
+.list-group {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border: 1px solid #ccc;
+
+}
+
+.list-group li {
+  background: white;
+  border-top: 1px solid #ddd;
+  padding: .7em;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 14px;
+
+}
+
+.list-group li>i {
+  margin-right: 8px;
+  font-size: 12px;
+  color: var(--primary);
+}
+
+.list-group li:first-child>i {
+  font-size: 14px;
+  background: none;
+  color: #666666;
+  margin-right: 5px;
+}
+
+.list-group li:first-child {
+  border-top: 0;
+  background: #efefef;
+  color: #666666;
+  font-size: 14px;
+
+}
+
+hr {
+  height: 1px;
+  background-color: #fdb432;
+  border: none;
+  margin: 10px 0;
+}
+
+table td,
+table th {
+  border: 1px solid #ddd;
+  padding: 8px;
+  color: #000;
+
+}
+
+.tr td {
+  /* color: var(--primary) !important; */
+  font-weight: 600;
+}
+
+.tr-color td {
+  color: var(--primary) !important;
+}
+
+.table tr td{
+  font-size: 14px;
+}

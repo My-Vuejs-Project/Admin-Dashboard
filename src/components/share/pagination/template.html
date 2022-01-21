@@ -1,0 +1,43 @@
+<div class="pagination">
+  <div class="btn-responsive" style="margin-left: auto;">
+    <div>
+      <span class="h30 pt5">Go to</span>
+      <span
+        class="mb0 text-14"
+        title="enter go to page"
+        style="margin-top:-2px; border: 1px solid #ccc;"
+      >
+        <input
+          type="number"
+          min="1"
+          v-model="inputPage"
+          v-on:keyup.enter="goTo(Number(inputPage))"
+          class="h30"
+          style="padding: 0px; outline: none;width: 50px;"
+        />
+      </span>
+    </div>
+
+    <div>
+      <span
+        @click="goTo(Number(page)-1)"
+        title="Previous"
+        style="width:30px;text-align:center;background: black;padding: 5px 8px;border-radius: 4px;color:white;margin-right: 3px;"
+      >
+        &laquo;
+      </span>
+
+      <span class="h30 mb0 pt6 text-14">
+        Page {{page}} of {{pagination}}
+      </span>
+
+      <span
+        @click="goTo(Number(page)+1)"
+        title="Next"
+        style="background: black;padding: 5px 12px;border-radius: 4px;color:white;margin-right: 3px;"
+      >
+        &raquo;
+      </span>
+    </div>
+  </div>
+</div>

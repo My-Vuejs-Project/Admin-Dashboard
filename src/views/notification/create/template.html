@@ -1,0 +1,119 @@
+<div class="row p6 radius6 animate-bottom">
+
+  <div v-if="display.imagePreview" class="overlay">
+    <div @click="closeModal" class="overlay"></div>
+    <div class="modal">
+      <img :src="getFullImage(data.media.url)" class="attachment mr6" />
+    </div>
+  </div>
+
+  <div v-if="display.media" class="overlay">
+    <div @click="closeModal" class="overlay"></div>
+    <div class="modal-md">
+      <Media type="single" :method="closeModal" :mediaSelected = " this.data.media !='' ? [this.data.media] : []" folder="notification" @existedMedia="existedMediaCallback">
+      </Media>
+    </div>
+  </div>
+
+  <div class="row bg-white border-top-light-blue">
+    <div class="container-wrap">
+      <div class="title">
+        Notification
+      </div>
+
+      <div class="content">
+        <div class="split">
+          <div class="txt-title">
+            <span class="txt-danger" style="line-height: 31px;"></span>
+            <span class="line-h31">Upload Image :</span>
+          </div>
+         
+          <div class="media-container" style="position: relative;">
+            <div style="width: 100%;border-radius: 4px;border:1px solid #ccc;padding:3px;display: inline-block;">
+              <div v-if="data.media" @click="imagePreview"
+                class="go-left pointer" style="display: flex;">
+                <img :src="getFullImage(data.media.url)" height="35px" class="attachment mr6" />
+                <div class="p-file-name">
+                  <span class="font12 p-file-name mr6"
+                    style="line-height: 35px;">{{getNameFromUrl(data.media.url)}}</span>
+                </div>
+                <img :src="require('@/assets/images/cancel1.svg')" alt="" width="10px" @click="removeMedia" />
+              </div>
+              <div v-else class="go-left">
+                <img :src="require('@/assets/icons/Vectorpaperclip.png')" width="8px" class="attachment mh6" />
+                <span class="font12" style="line-height: 35px;">No file selected</span>
+              </div>
+              <label @click="chooseImage" id="image" class="btn btn-secondary btn-sm go-right mt2 mr2">
+                Choose file
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <div class="split">
+          <div class="txt-title">
+            <span class="txt-danger" style="line-height: 31px;">*</span>
+            <span class="line-h31">Title :</span>
+          </div>
+
+          <div class="input-container">
+            <input v-model="body.title" type="text" placeholder="Input title..." />
+          </div>
+        </div>
+
+        <div class="split mt35">
+          <div class="txt-title">
+            <span class="txt-danger" style="line-height: 31px;">*</span>
+            <span class="line-h31">Description :</span>
+          </div>
+
+          <textarea v-model="body.description" type="text" maxlength="1000" placeholder="Short description..."
+            class="input outline-dark desc"></textarea>
+        </div>
+
+        <div class="split" v-if="!display.schedule" style="margin-bottom: 0 ;">
+          <div class="txt-title">
+            <span class="line-h31">Schedule Notification :</span>
+          </div>
+
+          <div class="disable-password">
+            <button class="btn btn-secondary btn-sm mt2 mr2 " @click="display.schedule = 'true'"
+              title="Add Schedule">
+              Add Schedule
+            </button>
+          </div>
+        </div>
+
+        <div v-if="display.schedule" class="split">
+          <div class="txt-title">
+            <span class="txt-danger" style="line-height: 31px;">*</span>
+            <span class="line-h31">Schedule Notification :</span>
+          </div>
+
+          <div class="input-container">
+            <input v-model="models.date" type="date" placeholder="mm/dd/yyyy" />
+          </div>
+        </div>
+
+        <div v-if="display.schedule" class="split" style="margin-bottom: 0 ;">
+          <div class="txt-title">
+          </div>
+
+          <div class="input-container">
+            <input v-model="models.time" type="time" placeholder="HH:MM" />
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12 p6 mb12" style="display: flex;justify-content: flex-end;">
+        <button @click="goBack" class="btn btn-light-secondary mr8">
+          Cancel
+        </button>
+        <button v-if="!isCreating" @click="submitCreateNotification" class="btn btn-light-info">
+          Create
+        </button>
+        <button v-else class="btn btn-light-info">Loading...</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,121 @@
+<div class="row">
+  <div v-if="update.show" class="overlay">
+    <div @click="closeModal" class="overlay"></div>
+    <div class="modal-md">
+      <div class="modal-header border-bottom txt-info">
+        <span class="txt-sm">Update App Version</span>
+      </div>
+      <div class="modal-body" style="overflow-y: hidden; padding: 16px;">
+        <div class="row">
+          <div class="col-12 p6 go-left">
+            <p class="mb0">Android</p>
+          </div>
+          <div class="col-12 pt0 p6 go-left">
+            <input v-model="update.data.android" type="text" placeholder="Input Android version"
+              class="input outline-dark" />
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12 p6 go-left">
+            <p class="mb0">iOS</p>
+          </div>
+          <div class="col-12 pt0 p6 go-left">
+            <input v-model="update.data.ios" type="text" placeholder="Input iOS version" class="input outline-dark" />
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12 p6 go-left">
+            <p class="mb0">Huawei</p>
+          </div>
+          <div class="col-12 pt0 p6 go-left">
+            <input v-model="update.data.huawei" type="text" placeholder="Input Huawei version"
+              class="input outline-dark" />
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12 p6 go-left">
+            <p class="mb0">Force Update</p>
+          </div>
+          <div class="col-12 pt0 p6 go-left">
+            <select v-model="update.data.forceUpdate" class="input outline-dark text-12">
+              <option value="true">True</option>
+              <option value="false">False</option>
+            </select>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12 p6 go-left">
+            <p class="mb0">Maintenance Status</p>
+          </div>
+          <div class="col-12 pt0 p6 go-left">
+            <select v-model="update.data.maintenanceStatus" class="input outline-dark text-12">
+              <option value="true">True</option>
+              <option value="false">False</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer border-top">
+        <button v-if="!isUpdating" @click="confirmUpdate" class="btn btn-light-info btn-xs go-right">
+          Confirm
+        </button>
+        <button v-else class="btn btn-light-info btn-xs go-right">
+          Loading...
+        </button>
+        <button @click="closeModal" class="btn btn-light-secondary btn-xs mr12 go-right">
+          Cancel
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="row p6 radius6 animate-bottom">
+    <div class="row p12 bg-white border-top-light-blue bg">
+      <header class="navbar r-navbar">
+        <div class="ul-xl">
+          <div class="ul-xl-li">
+            App Version
+          </div>
+        </div>
+      </header>
+      <div class="table-control p12">
+        <table class="table wh800" cellspacing="0">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Android</th>
+              <th>iOS</th>
+              <th>Huawei</th>
+              <th>Force Update</th>
+              <th>Maintenance Status</th>
+              <th v-if="checkoutPermission('UPDATE_APP_VERSION')" style="text-align: center;width: 100px;">Action</th>
+            </tr>
+          </thead>
+          <tbody v-if="!isFetching && checkoutPermission('LIST_APP_VERSION')">
+            <tr v-for="(version,index) in data.versions" :key="(version,index)" class="hover-list">
+              <td>{{version.id}}</td>
+              <td>{{version.android}}</td>
+              <td>{{version.ios}}</td>
+              <td>{{version.huawei}}</td>
+              <td>
+                <span v-if="version.forceUpdate == true" class="txt-success">True</span>
+                <span v-else class="txt-danger">False</span>
+              </td>
+              <td>
+                <span v-if="version.maintenanceStatus == true" class="txt-success">True</span>
+                <span v-else class="txt-danger">False</span>
+              </td>
+              <td class="tr-right">
+                <button v-if="checkoutPermission('UPDATE_APP_VERSION')" @click="displayFormUpdate(index)" class="btn btn-light-info btn-xs">
+                  Update
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <TableLoading v-if="isFetching" />
+        <NoItem v-if="isNoData" />
+      </div>
+    </div>
+  </div>
+</div>

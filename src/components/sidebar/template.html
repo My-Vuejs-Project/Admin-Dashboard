@@ -1,0 +1,50 @@
+<div>
+  <div class="box-nav-profile mv32">
+    <img :src="require('@/assets/images/logo.png')" height="64px" />
+  </div>
+
+  <ul>
+    <li
+      v-for="(item, index) in menu_list"
+      :key="(item, index)"
+      class="ul-nav-menu"
+    >
+      <div v-if="!item.children">
+        <router-link
+          :to="{name : item.routeName, params: {title: item.title}}"
+          v-if="!item.hidden"
+          :class="$root.$route.name === item.routeName ? 'active' : ''"
+        >
+          <span class="icon">
+            <i :class="item.icon"></i>
+          </span>
+          <span>{{item.name}}</span>
+        </router-link>
+      </div>
+
+      <div v-else>
+        <li @click="dorpDown(index)" class="dropdown">
+          <i :class="item.icon +' icon'"></i> {{item.name}}
+          <i class="fas fa-caret-down dropdown-icon"></i>
+        </li>
+
+        <ul v-if="item.dropdown" class="sidebar animate-bottom">
+          <li
+            v-for="(child,childIndex) in item.children"
+            :key="(child,childIndex)"
+          >
+            <router-link
+              :to="{name: child.routeName}"
+              :class="$root.$route.name == child.routeName ? 'active' : ''"
+            >
+              <span class="icon">
+                <i :class="child.icon"></i>
+              </span>
+              <span>{{child.name}}</span>
+            </router-link>
+          </li>
+        </ul>
+      </div>
+    </li>
+  </ul>
+</div>

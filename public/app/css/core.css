@@ -1,0 +1,252 @@
+:root {
+    --primary: #f38221;
+    --primary-light: #FEE8E8;
+    --primary-dark: #540100;
+
+    --secondary: #EFEFEF;
+    --secondary-dark: #E2E2E2;
+
+    --white: #FFFFFF;
+    --white-light: #F9F9F9;
+    --white-dark: #EEEEEE;
+
+    --success: #3AA552;
+    --success-light: #E9FEE9;
+
+    --danger: #CC2127;
+    --danger-light: #F8D7DA;
+
+    --warning: #FFC105;
+    --warning-light: #FEF3D6;
+
+    --info: #0C548D;
+    --info-light: #D1ECF1;
+
+    --select: #91D5FF;
+    --select-light: #E6F7FF;
+
+    --dark: #111111;
+    --dark-light: #767676;
+
+    --light: #f8f9fa;
+    --black: #000000;
+    --text-dark: #212529;
+    --bg-overlay: rgba(0,0,0,.5);
+    
+    --text-lighten:#6c7293;
+
+    --animate-duration: 1s;
+    --animate-delay: 1s;
+    --animate-repeat: 1;
+
+    
+    --font-family-sans-serif: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+    --font-family-monospace: SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
+}
+*,::after, ::before {
+    box-sizing: border-box;
+}
+
+.m-scroll::-webkit-scrollbar-thumb {
+    background: #555;
+    height: 4px;
+    border-radius: 10px;
+}
+.m-scroll::-webkit-scrollbar-track {
+    background: #fff;
+}
+.m-scroll::-webkit-scrollbar-thumb:horizontal{
+    background: var(--secondary-light);
+    border-radius: 10px;
+}
+.m-scroll::-webkit-scrollbar {
+    width: 4px;
+    height: 5px;
+}
+button, input, select, option, textarea{
+    font-family: 'Poppins', sans-serif;
+}
+
+.row{
+    width: 100%;
+    /* display: inline-table; */
+    position: relative;
+    border-radius: 4px;
+}
+.overlow{
+    position: relative;
+    border-radius: 4px;
+    
+}
+.flex-row{
+    display: flex;
+    flex-direction: row;
+}
+.flex-column{
+    display: flex;
+    flex-direction: column;
+}
+.pointer{
+    cursor:pointer;
+}
+/* widget */
+.group-list-item{
+    width: 100%;
+    display: block;
+    position: relative;
+    border-bottom: 1px solid var(--bg-secondary);
+    padding: 12px 0 12px 62px;
+}
+.group-list-item:last-child{
+    border-bottom: none !important;
+}
+.group-list-item .item-cover{
+    width:50px;
+    height:50px;
+    position:absolute;
+    top:0;
+    left:0;
+    margin-top: 12px;
+}
+.group-list-item .item-cover img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+.group-list-item .item-info{
+    width: 100%;
+    display: block;
+    position: relative;
+}
+
+.item-info .item-title{
+    font-weight: 600;
+    margin: 0;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    position: relative;
+}
+.item-title .item-preview{
+    font-weight:300;
+    position:absolute;
+    top:50%;
+    right:0;
+    transform: translateY(-50%);
+}
+.item-info .item-preview{
+    font-weight:300;
+    position:absolute;
+    top:50%;
+    right:0;
+    transform: translateY(-50%);
+}
+
+.item-info .item-desc{
+    width: 100%;
+    display: inline-block;
+    position: relative;
+    color: var(--gray-light);
+}
+.item-info .item-desc i{
+    margin-right: 4px;
+}
+/* end widget */
+
+
+.wrapper-container{
+  width:100%;
+  min-height:100vh;
+  position:relative;
+  padding: 60px 5px 5px 245px;
+}
+.table-control{
+  width: 100%;
+  display: block;
+  position: relative;
+  overflow-x: auto;
+  white-space: nowrap;
+  min-height: 575px;
+}
+.text-ellipsis {
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.content-title {
+  font-size: 20px;
+  text-transform: capitalize;
+  font-weight: 600;
+}
+.absolute-center{
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform: translate(-50%,-50%);
+}
+.fw200{
+    font-weight: 200;
+}
+.fw300{
+  font-weight: 300;
+}
+.fw400{
+  font-weight: 400;
+}
+.fw500{
+    font-weight: 500;
+}
+.fw600{
+  font-weight: 600;
+}
+
+.rounded{
+  border-radius: 50%;
+}
+.round2{
+    border-radius: 2px;
+}
+.round3{
+    border-radius: 3px;
+}
+.round4{
+    border-radius: 4px;
+}
+.round5{
+    border-radius: 5px;
+}
+.round6{
+    border-radius: 6px;
+}
+.round7{
+    border-radius: 7px;
+}
+.round8{
+    border-radius: 8px;
+}
+.round9{
+    border-radius: 9px;
+}
+.round10{
+    border-radius: 10px;
+}
+.img-cover{
+    object-fit: cover;
+}
+.row-hover:hover{
+    background: var(--secondary);
+    border-radius: 4px;
+}
+.cursor-pointer{
+    cursor: pointer;
+}
+.absolute{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+/* .chartjs-render-monitor {
+    height: 350px !important;
+} */

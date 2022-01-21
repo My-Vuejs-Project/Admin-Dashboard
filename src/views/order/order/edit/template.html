@@ -1,0 +1,139 @@
+<div class="row border-top-light-blue bg-white p24">
+  <div class="font18" style="font-weight: 600 !important; margin: 0px 4px 0px 4px">
+    <i @click="goBack" class="fas fa-arrow-left pointer" title="Back" style="margin-right: 18px;cursor: pointer;"></i>
+    Order Detail
+    <hr>
+  </div>
+  <div v-if = "!isFetching">
+    <div class="row">
+      <div class="col-4 col-md-6 p4">
+        <div class="row">
+          <ul class="list-group">
+            <li><i class="fa fa-shopping-cart"></i> Order Details</li>
+            <li><i class="fas fa-money-check"></i> {{data.orderDetail.paymentMethod.name}}</li>
+            <li v-if="data.orderDetail.paymentDetail.shippingRate == 0"><i class="fas fa-truck"></i> Shipping Free</li>
+            <li v-else="data.orderDetail.paymentDetail.shippingRate"><i class="fas fa-truck"></i> Shipping Charge </li>
+            <li><i class="fas fa-calendar-alt"></i> {{data.orderDetail.createdAt | moment("DD-MM-YYYY h:mm A")}}</li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-4 col-md-6 p4">
+        <div class="row">
+          <ul class="list-group">
+            <li><i class="fas fa-user"></i> Customer</li>
+            <li><i class="fas fa-user"></i> {{data.orderDetail.account.firstName}} {{data.orderDetail.account.lastName}}
+            </li>
+            <li v-if="data.orderDetail.account.contactEmail"><i class="fas fa-envelope"></i>
+              {{data.orderDetail.account.contactEmail}}</li>
+            <li v-if="data.orderDetail.account.contactPhone"><i class="fa fa-phone"></i>
+              {{data.orderDetail.account.contactPhone}}</li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-4 col-md-6 p4">
+        <div class="row">
+          <ul class="list-group">
+            <li><i class="fa fa-map-marker"></i> Shipping Address</li>
+            <li>
+              <b v-if="data.orderDetail.location.houseNo" style="font-weight: 300;"> No. {{data.orderDetail.location.houseNo}}<br></b>
+              <b v-if="data.orderDetail.location.street" style="font-weight: 300;"> Street {{data.orderDetail.location.street}} <br></b>
+              <b v-if="data.orderDetail.location.name" style="font-weight: 300;"> {{data.orderDetail.location.name}} <br></b>
+              <b v-if="data.orderDetail.location.district.name" style="font-weight: 300;"> {{data.orderDetail.location.district.name}} <br></b>
+              <b v-if="data.orderDetail.location.province.name" style="font-weight: 300;"> {{data.orderDetail.location.province.name}} <br></b>
+              <b v-if="data.orderDetail.location.country.name" style="font-weight: 300;"> {{data.orderDetail.location.country.name}} </b>
+            </li>
+  
+          </ul>
+        </div>
+      </div>
+    </div>
+    
+    <div class="row p4 mt12">
+      <ul class="list-group">
+        <li><i class="fa fa-shopping-cart"></i> Order</li>
+        <li style="padding: 12px; padding-bottom: 32px;">
+          <table class="table" cellspacing="0">
+            <thead>
+              <tr>
+                <th>No</th>
+                <th>Product</th>
+                <th class="tr-right">Quality</th>
+                <th class="tr-right">Unit Price</th>
+                <th class="tr-right">Total</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="(orderItem, index) in data.orderDetail.orderItems" :key="(orderItem, index)">
+                <td>{{index+1}}</td>
+                <td>{{orderItem.name}}</td>
+                <td class="tr-right">{{orderItem.quantity}}</td>
+                <td class="tr-right">{{(orderItem.priceBeforeDiscount).toFixed(2)}}$</td>
+                <td class="tr-right">{{(orderItem.totalAmount).toFixed(2)}}$</td>
+              </tr>
+              <tr class="tr">
+                <td class="tr-right" colspan="4">Sub-Total</td>
+                <td class="tr-right">{{(data.orderDetail.paymentDetail.subtotalAmount).toFixed(2)}}$</td>
+              </tr>
+              <tr class="tr" v-if="data.orderDetail.paymentDetail.discountAmount">
+                <td class="tr-right" colspan="4">Discount</td>
+                <td class="tr-right">-{{(data.orderDetail.paymentDetail.discountAmount).toFixed(2)}}$</td>
+              </tr>
+              <tr class="tr">
+                <td class="tr-right" colspan="4">Shipping Charge</td>
+                <td class="tr-right">{{(data.orderDetail.paymentDetail.shippingRate).toFixed(2)}}$</td>
+              </tr>
+              <tr class="tr" v-if="data.orderDetail.paymentDetail.couponDiscountAmount">
+                <td class="tr-right" colspan="4">Coupon({{data.orderDetail.paymentDetail.couponCode}})</td>
+                <td class="tr-right">-{{(data.orderDetail.paymentDetail.couponDiscountAmount).toFixed(2)}}$</td>
+              </tr>
+
+              <tr class="tr tr-color">
+                <td class="tr-right" colspan="4">Total</td>
+                <td class="tr-right">{{(data.orderDetail.paymentDetail.totalAmount).toFixed(2)}}$</td>
+              </tr>
+            </tbody>
+          </table>
+        </li>
+      </ul>
+    </div>
+    <div class="row p4 mt12">
+      <ul class="list-group">
+        <li><i class="fas fa-edit"></i>Update Order</li>
+        <li>
+          <br>
+          <div class="split">
+            <div class="txt-title">
+              <span class="txt-danger" style="line-height: 31px;"></span>
+              <span class="line-h31 font14">Description :</span>
+            </div>
+            <textarea v-model="body.text" type="text" placeholder="input description..."
+              class="input outline-dark desc"></textarea>
+          </div>
+
+          <div class="split">
+            <div class="txt-title">
+              <span class="txt-danger" style="line-height: 31px;">*</span>
+              <span class="line-h31 font14">Status :</span>
+            </div>
+            <select v-model="body.orderStatusId" class="input input-xs mr6 filter-type">
+              <option v-for="(orderStatus, index) in data.orderStatus" :key="(orderStatus,index)"
+                :value="orderStatus.id">
+                {{orderStatus.name}}</option>
+            </select>
+          </div>
+          <div class="mt20" style="display: flex;justify-content: flex-end;">
+            <button @click="goBack" class="btn btn-light-secondary mr8">
+              Cancel
+            </button>
+            <button v-if="!isUpdating" @click="submitUpdateOrder" class="btn btn-light-info">
+              Update
+            </button>
+            <button v-else class="btn btn-light-info">Loading...</button>
+          </div>
+          <br>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <TableLoading v-if= "isFetching"></TableLoading>
+</div>

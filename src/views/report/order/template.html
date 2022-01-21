@@ -1,0 +1,179 @@
+<div class="row p6 radius6 animate-bottom">
+  <div class="row bg-white border-top-light-blue">
+    <div class="container-wrap">
+      <div class="title">
+        Filter Order Report
+      </div>
+
+      <div class="content">
+        <div class="split" v-if="data.customerList.length > 0">
+          <div class="txt-title">
+            <span class="line-h31">Customer's Name :</span>
+          </div>
+
+          <multiselect v-model="body.fullName" :options="data.customerList" placeholder="All Customer" label="username"
+            track-by="username"><span slot="noResult">Oops!
+              No elements found.</span></multiselect>
+        </div>
+
+        <div class="split" v-if="data.paymentMethods.length > 0">
+          <div class="txt-title">
+            <span class="line-h31">Payment Method :</span>
+          </div>
+
+          <select v-model="body.paymentMethodId" class="input-container">
+            <option value="">All Payment Method</option>
+            <option v-for="(paymentMethod,index) in data.paymentMethods" :key="(paymentMethod,index)"
+              :value="paymentMethod.id">{{paymentMethod.name}}</option>
+          </select>
+        </div>
+
+        <div class="split">
+          <div class="txt-title">
+            <span class="line-h31">Min Price :</span>
+          </div>
+
+          <div class="input-container">
+            <input v-model="body.minPrice" type="number" placeholder="Input minimum price" />
+          </div>
+        </div>
+
+        <div class="split">
+          <div class="txt-title">
+            <span class="line-h31">Max Price :</span>
+          </div>
+
+          <div class="input-container">
+            <input v-model="body.maxPrice" type="number" placeholder="Input maximum price" />
+          </div>
+        </div>
+
+        <div class="split">
+          <div class="txt-title">
+            <span class="line-h31">Start Date :</span>
+          </div>
+
+          <date-picker v-model="body.startDate" value-type="format" placeholder="Select date" format="YYYY-MM-DD"></date-picker>
+        </div>
+
+        <div class="split">
+          <div class="txt-title">
+            <span class="line-h31">End Date :</span>
+          </div>
+
+          <date-picker v-model="body.endDate" value-type="format" placeholder="Select date" format="YYYY-MM-DD"></date-picker>
+        </div>
+
+        <div v-if="data.orderStatus.length > 0" class="split">
+          <div class="txt-title">
+            <span class="line-h31">Order Status :</span>
+          </div>
+
+          <select v-model="body.orderStatus" class="input-container">
+            <option value="">All Order Status</option>
+            <option v-for="(orderStatus,index) in data.orderStatus" :key="(orderStatus,index)" :value="orderStatus.id">
+              {{orderStatus.name}}</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="col-12 p6 mb12" style="display: flex;justify-content: flex-end;">
+        <div>
+          <button v-if="!isGenerating" @click="generateReport('')" class="btn btn-theme-grey-light btn-xs btn-create">
+            <span>Generate</span>
+          </button>
+          <button v-else class="btn btn-theme-grey-light btn-xs btn-create">
+            <span>Generating...</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- <div v-if="isGenerated" class="row bg-white border-top-light-blue mt26">
+    <input type="file" id="file" hidden />
+    <div class="table-control p12" style="background-color: white; width: 100%;height: 600px;
+      max-height: 900px;">
+      <header class="navbar r-navbar report-header mb12">
+        <div class="ul-xl">
+          <div class="ul-xl-li">
+            Reports
+          </div>
+        </div>
+
+        <div v-if="table.headers.length > 0 && table.body.length > 0" class="con-search-btn" style="position: unset;">
+          <button v-if="!isExporting" @click="generateReport('export')"
+            class="btn btn-theme-grey-light btn-xs btn-create">
+            Export File
+          </button>
+          <button v-else class="btn btn-theme-grey-light btn-xs btn-create">
+            <span>Exporting...</span>
+          </button>
+        </div>
+      </header>
+
+      <div>
+        <table class="table wh800" cellspacing="0" style="position: absolute;">
+          <thead>
+            <tr>
+              <th v-for="item in table.headers" class="table-header">{{item}}</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="(item, index) in table.body" :key="(item, index)" class="hover-list">
+              <td v-for="(key,keyIndex) in item">
+                {{keyIndex == 'Created Date' ? ExcelDateToJSDate(key) : key}}
+              </td>
+            </tr>
+          </tbody>
+          <tfoot></tfoot>
+        </table>
+      </div>
+      
+      <div v-if="table.body.length == 1" class="row">
+        <p class="txt-center" style="line-height:490px">No Report</p>
+      </div>
+    </div>
+  </div> -->
+  <div v-if="isGenerated" class="row bg-white border-top-light-blue mt26">
+    <input type="file" id="file" hidden />
+    <header class="navbar r-navbar">
+      <div class="ul-xl">
+        <div class="ul-xl-li">
+          Reports
+        </div>
+      </div>
+
+      <div v-if="table.headers.length > 0 && table.body.length > 0" class="con-search-btn" style="position: unset;">
+        <button v-if="!isExporting" @click="generateReport('export')"
+          class="btn btn-theme-grey-light btn-xs btn-create">
+          Export File
+        </button>
+        <button v-else class="btn btn-theme-grey-light btn-xs btn-create">
+          <span>Exporting...</span>
+        </button>
+      </div>
+    </header>
+
+    <div class="table-control p12">
+      <table class="table wh800" cellspacing="0">
+        <thead>
+          <tr>
+            <th v-for="item in table.headers" class="table-header">{{item}}</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr v-for="(item, index) in table.body" :key="(item, index)" class="hover-list">
+            <td v-for="(key,keyIndex) in item">
+              {{keyIndex == 'Created Date' ? ExcelDateToJSDate(key) : key}}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div v-if="table.body.length == 1" class="row">
+    <p class="txt-center" style="line-height:490px">No Report</p>
+  </div>
+</div>

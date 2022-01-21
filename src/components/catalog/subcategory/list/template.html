@@ -1,0 +1,84 @@
+<div class="row mt35 mb25">
+  <div class="row radius6 animate-bottom">
+    <div class="row p12 bg-white border-top-light-blue">
+      <header class="navbar r-navbar">
+        <div class="ul-xl">
+          <div class="ul-xl-li">
+            Subcateogry List
+          </div>
+        </div>
+      </header>
+
+      <div class="table-control p12">
+        <table class="table wh800" cellspacing="0">
+          <thead>
+            <tr>
+              <th>No</th>
+              <th>Image</th>
+              <th>Name</th>
+              <th>Status</th>
+              <th width="100px">Sort Order</th>
+              <th style="text-align: center;width: 100px;">Action</th>
+            </tr>
+          </thead>
+          <tbody v-if="!isFetching">
+            <tr v-for="(subcategory,index) in data.subcategories" :key="(subcategory,index)" class="hover-list">
+              <td>{{index+1}}</td>
+              <td>
+                <img v-if="subcategory.imageUrl" :src="getFullImage(subcategory.imageUrl)" alt=""
+                  style="height: 40px;" />
+                <img v-else :src="require('@/assets/images/noImage.jpg')" alt="No Image" style="height: 40px;" />
+              </td>
+              <td>{{subcategory.name}}
+              </td>
+              <td>
+                <span v-if="subcategory.status == 'active'" class="txt-success">Active</span>
+                <span v-else class="txt-danger">Inactive</span>
+              </td>
+              <td class="txt-center">{{subcategory.sortOrder}}</td>
+              <td class="tr-right">
+                <router-link :to="{name : 'EditSubcategory', query: {id: subcategory.id}}"
+                  class="btn btn-light-info btn-xs mr5">
+                  Update
+                </router-link>
+                <button @click="popupModal('delete',index)" class="btn btn-light-dark btn-xs">
+                  Delete
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <TableLoading v-if="isFetching" />
+      </div>
+      <div class="total ph12">
+        <div class="ul-xl-li go-left">
+          Total : {{data.pagination.total}}
+        </div>
+        <Pagination v-if="data.pagination.totalPage > 0" :pagination="data.pagination.totalPage" />
+      </div>
+    </div>
+  </div>
+
+  <div v-if="display.modal.delete.show" class="overlay">
+    <div @click="closeModal" class="overlay"></div>
+    <div class="modal-md">
+      <div class="modal-header border-bottom txt-info">
+        <span class="txt-sm">Delete</span>
+      </div>
+      <div class="modal-body" style="overflow-y: hidden; padding: 16px;">
+        <span>Do you want to delete this record?</span>
+      </div>
+      <div class="modal-footer border-top">
+        <button v-if="!isDeleting" @click="deleteSubcategory" class="btn btn-light-info btn-xs go-right">
+          Yes
+        </button>
+        <button v-else class="btn btn-light-info btn-xs go-right">
+          Loading...
+        </button>
+        <button @click="closeModal" class="btn btn-light-secondary btn-xs mr12 go-right">
+          No
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

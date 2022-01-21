@@ -1,0 +1,42 @@
+/* outline color */
+.outline-primary:focus{
+    outline: none !important;
+    border:1px solid var(--primary) !important;
+    box-shadow: 0 0 2px var(--primary);
+}
+.outline-secondary:focus{
+    outline: none !important;
+    border:1px solid var(--secondary-dark) !important;
+    box-shadow: 0 0 2px var(--secondary-dark);
+}
+.outline-success:focus{
+    outline: none !important;
+    border:1px solid var(--success) !important;
+    box-shadow: 0 0 2px var(--success);
+}
+.outline-danger:focus{
+    outline: none !important;
+    border:1px solid var(--danger) !important;
+    box-shadow: 0 0 2px var(--danger);
+}
+.outline-warning:focus{
+    outline: none !important;
+    border:1px solid var(--warning) !important;
+    box-shadow: 0 0 2px var(--warning);
+}
+.outline-info:focus{
+    outline: none !important;
+    border:1px solid var(--info) !important;
+    box-shadow: 0 0 2px var(--info);
+}
+.outline-select:focus{
+    outline: none !important;
+    border:1px solid var(--select) !important;
+    box-shadow: 0 0 2px var(--select);
+}
+.outline-dark:focus{
+    outline: none !important;
+    border:1px solid var(--text-dark) !important;
+    box-shadow: 0 0 2px var(--text-black);
+}
+/* end outline color */

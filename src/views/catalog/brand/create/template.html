@@ -1,0 +1,132 @@
+<div class="row p6 radius6 animate-bottom">
+  <div v-if="display.imagePreview" class="overlay">
+    <div @click="closeModal" class="overlay"></div>
+    <div class="modal">
+      <img v-if="body.image.file" :src="fileToPath(body.image.file)" class="attachment mr6" />
+      <img v-else :src="getFullImage(data.media.url)" class="attachment mr6" />
+    </div>
+  </div>
+
+  <div v-if="display.media" class="overlay">
+    <div @click="closeModal" class="overlay"></div>
+    <div class="modal-md">
+      <Media type="single" :method="closeModal" folder="catelog" @existedMedia="existedMediaCallback"
+        @newMedia="newMediaCallBack">
+      </Media>
+    </div>
+  </div>
+
+  <div class="row bg-white border-top-light-blue">
+    <div class="container-wrap">
+      <div class="title">
+        Brand
+      </div>
+
+      <div class="content">
+        <div class="split">
+          <div class="txt-title">
+            <span class="txt-danger" style="line-height: 31px;">*</span>
+            <span class="line-h31">Image :</span>
+          </div>
+
+          <div class="media-container" style="position: relative;">
+            <div style="width: 100%;border-radius: 4px;border:1px solid #ccc;padding:3px;display: inline-block;">
+              <div v-if="body.image.file" @click="imagePreview" class="go-left pointer display-flex">
+                <img :src="fileToPath(body.image.file)" height="35px" class="attachment mr6" />
+                <div class="p-file-name">
+                  <span class="font12 p-file-name mr6" style="line-height: 35px;">{{body.image.file.name}}</span>
+                </div>
+                <span class="font12" style="line-height: 35px;">( {{body.image.file.size/1000}} KB )</span>
+              </div>
+
+              <div v-else-if="data.media && Object.keys(data.media).length != 0" @click="imagePreview"
+                class="go-left pointer display-flex" style="display: flex;">
+                <img :src="getFullImage(data.media.url)" height="35px" class="attachment mr6" />
+                <div class="p-file-name">
+                  <span class="font12 p-file-name mr6"
+                    style="line-height: 35px;">{{getNameFromUrl(data.media.url)}}</span>
+                </div>
+              </div>
+
+              <div v-else class="go-left">
+                <img :src="require('@/assets/icons/Vectorpaperclip.png')" width="8px" class="attachment mh6" />
+                <span class="font12" style="line-height: 35px;">No file selected</span>
+              </div>
+
+              <label @click="chooseImage" id="image" class="btn btn-secondary btn-sm go-right mt2 mr2">
+                Choose file
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <div class="split">
+          <div class="txt-title">
+            <span class="txt-danger" style="line-height: 31px;">*</span>
+            <span class="line-h31">Name :</span>
+          </div>
+
+          <div class="input-container">
+            <input v-model="body.name" type="text" placeholder="input name..." />
+          </div>
+        </div>
+
+        <div class="split">
+          <div class="txt-title">
+            <span class="txt-danger" style="line-height: 31px;">*</span>
+            <span class="line-h31">Cateory :</span>
+          </div>
+
+          <select v-model="body.categoryId" class="input-container">
+            <optgroup v-for="(category,categoryIndex) in data.categoryList" :key="(category,categoryIndex)"
+              :label="category.name">
+              <option v-for="(subcategory, index) in category.children" :key="index" :value="subcategory.id"
+                v-model.number="body.categoryId">{{subcategory.name}}
+              </option>
+            </optgroup>
+          </select>
+        </div>
+
+        <div class="split">
+          <div class="txt-title">
+            <span class="txt-danger" style="line-height: 31px;">*</span>
+            <span class="line-h31">Sort Order :</span>
+          </div>
+
+          <div class="input-container">
+            <input v-model.number="body.sortOrder" type="number" placeholder="input order..." />
+          </div>
+        </div>
+        
+        <div class="split" style="margin-bottom: 0;">
+          <div class="txt-title">
+            <span class="txt-danger" style="line-height: 31px;">*</span>
+            <span class="line-h31">Status :</span>
+          </div>
+
+          <div class="select">
+            <div class="radio-item">
+              <input type="radio" id="active" v-model="body.status" value="active" />
+              <label for="active">Active</label>
+            </div>
+
+            <div class="radio-item">
+              <input type="radio" id="inactive" v-model="body.status" value="inactive" />
+              <label for="inactive">Inactive</label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12 p6 mb12" style="display: flex;justify-content: flex-end;">
+        <button @click="goBack" class="btn btn-light-secondary mr8">
+          Cancel
+        </button>
+        <button v-if="!isCreating" @click="submitCreateBrand" class="btn btn-light-info">
+          Create
+        </button>
+        <button v-else class="btn btn-light-info">Loading...</button>
+      </div>
+    </div>
+  </div>
+</div>

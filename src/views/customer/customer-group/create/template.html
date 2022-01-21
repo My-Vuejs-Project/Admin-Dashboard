@@ -1,0 +1,81 @@
+<div class="row p6 radius6 animate-bottom">
+  <div class="row bg-white border-top-light-blue">
+    <div class="container-wrap">
+      <div class="title">
+        Customer Group
+      </div>
+
+      <div class="content">
+        <div class="split">
+          <div class="txt-title">
+            <span class="txt-danger" style="line-height: 31px;">*</span>
+            <span class="line-h31">Name :</span>
+          </div>
+
+          <div class="input-container">
+            <input v-model="body.name" type="text" placeholder="input customer group name..." />
+          </div>
+        </div>
+
+        <div class="split">
+          <div class="txt-title mt5">
+            <span class="line-h31">Badge :</span>
+          </div>
+
+          <div class="media-container" style="position: relative;">
+            <div style="width: 100%;border-radius: 4px;border:1px solid #ccc;padding:3px;display: inline-block;">
+              <div v-if="body.badge" class="go-left pointer" style="display: flex;">
+                <img :src="fileToPath(body.badge)" height="35px" class="attachment mr6" />
+                <div class="p-file-name">
+                  <span class="font12 p-file-name mr6" style="line-height: 35px;">{{body.badge.name}}</span>
+                </div>
+                <span class="font12" style="line-height: 35px;">( {{body.badge.size/1000}} KB )</span>
+              </div>
+
+              <div v-else class="go-left">
+                <img :src="require('@/assets/icons/Vectorpaperclip.png')" width="8px" class="attachment mh6" />
+                <span class="font12" style="line-height: 35px;">No file selected</span>
+              </div>
+
+              <label :for="'chooseLogo'" class="btn btn-secondary btn-sm go-right mt2 mr2">
+                Choose file
+              </label>
+            </div>
+
+            <input @change="chooseLogo($event)" hidden type="file" :id="'chooseLogo'" :ref="'chooseLogo'"
+              accept="image/*" />
+          </div>
+        </div>
+
+        <div class="split">
+          <div class="txt-title">
+            <span class="line-h31">Description :</span>
+          </div>
+
+          <textarea v-model="body.shortDescription" type="text" placeholder="Description..."
+                  class="input outline-dark desc"></textarea>
+        </div>
+
+        <div class="split">
+          <div class="txt-title">
+            <span class="line-h31">Sort order :</span>
+          </div>
+
+          <div class="input-container">
+            <input v-model.number="body.sortOrder" type="number" placeholder="input order..." />
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12 p6 mb12" style="display: flex;justify-content: flex-end;">
+        <button @click="goBack" class="btn btn-light-secondary mr8">
+          Cancel
+        </button>
+        <button v-if="!isCreating" @click="submitCreate" class="btn btn-light-info">
+          Create
+        </button>
+        <button v-else class="btn btn-light-info">Loading...</button>
+      </div>
+    </div>
+  </div>
+</div>

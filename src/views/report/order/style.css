@@ -1,0 +1,109 @@
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+input {
+  outline-style: none;
+  border-style: none;
+  width: 100%;
+}
+
+.title {
+  margin-top: 20px;
+  font-weight: 600;
+  font-size: 18px;
+}
+
+.content {
+  margin: 10px 0;
+  border-top: 1px solid #fdb432;
+  border-bottom: 1px solid #fdb432;
+  padding: 50px 0;
+}
+
+.txt-title {
+  text-align: end;
+  align-self: center;
+}
+
+.select {
+  display: grid;
+  grid-template-columns: auto auto;
+  padding: 0;
+}
+
+.selection-option {
+  display: flex;
+  margin-bottom: 4px;
+  margin-left: 8px;
+}
+
+.container-wrap {
+  width: 75%;
+  margin: 0 auto;
+}
+
+.title {
+  margin-top: 20px;
+  font-weight: 600;
+  font-size: 18px;
+}
+
+.split:last-child {
+  margin-bottom: 0;
+}
+
+.split {
+  display: grid;
+  grid-template-columns: 25% auto;
+  gap: 40px;
+  margin-bottom: 35px;
+}
+
+.input-container {
+  border: 1px solid #cccccc;
+  background: white;
+  border-radius: 6px;
+  padding: 4px 6px;
+  position: relative;
+  height: 34px;
+}
+
+/* ====== Report style ======= */
+.report-header {
+  padding: 0 !important;
+}
+
+.table-header:last-child {
+  text-align: center;
+  width: 100px;
+}
+
+.btn-create {
+  background-color: var(--dark);
+  color: #fff;
+  margin-right: 7px;
+  width: 150px;
+  font-weight: 600;
+  height: 32px;
+  border-radius: 4px;
+}
+
+td {
+  height: 45px;
+}
+
+.mx-datepicker {
+  width: 100%;
+}
+input.mx-input {
+  color: #000;
+}

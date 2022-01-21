@@ -1,0 +1,97 @@
+<div class="row">
+  <div class="row p6 radius6 animate-bottom">
+    <div class="row p12 bg-white border-top-light-blue bg">
+      <header class="navbar r-navbar">
+        <div class="ul-xl">
+          <div class="ul-xl-li">
+            Settings
+          </div>
+        </div>
+      </header>
+      <div class="table-control p12">
+        <table class="table wh800" cellspacing="0">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Key</th>
+              <th>Value</th>
+              <th v-if="checkoutPermission('UPDATE_SETTING')" class="tr-right" style="padding-right: 18px;">Action</th>
+            </tr>
+          </thead>
+          <tbody v-if="!isFetching && checkoutPermission('LIST_SETTING')">
+            <tr v-for="(setting,index) in data.settings" :key="(setting,index)" class="hover-list">
+              <td>{{setting.name}}</td>
+              <td>{{setting.key}}</td>
+              <td class="fw600">{{setting.value}}</td>
+              <td class="tr-right">
+                <button v-if="checkoutPermission('UPDATE_SETTING')" @click="displayFormUpdate(index)"
+                  class="btn btn-light-info btn-xs">
+                  Update
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <TableLoading v-if="isFetching" />
+        <NoItem v-if="isNoData" />
+      </div>
+    </div>
+  </div>
+
+  <div v-if="update.show" class="overlay">
+    <div @click="closeModal" class="overlay"></div>
+    <div class="modal-md">
+      <div class="modal-header border-bottom txt-info">
+        <span class="txt-sm">Update Setting</span>
+      </div>
+      <div class="modal-body" style="overflow-y: hidden; padding: 16px;">
+        <div class="row">
+          <div class="col-12 p6 go-left">
+            <p class="mb0">Name</p>
+          </div>
+          <div class="col-12 pt0 p6 go-left">
+            <input v-model="update.data.name" disabled type="text" placeholder="Setting name"
+              class="input outline-dark not-allowed" />
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12 p6 go-left">
+            <p class="mb0">Key</p>
+          </div>
+          <div class="col-12 pt0 p6 go-left">
+            <input v-model="update.data.key" disabled type="text" placeholder="Setting Key"
+              class="input outline-dark not-allowed" />
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12 p6 go-left">
+            <p class="mb0">Value</p>
+          </div>
+          <div class="col-12 pt0 p6 go-left">
+            <input v-model="update.data.value" type="text" placeholder="Input value" class="input outline-dark" />
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12 p6 go-left">
+            <p class="mb0">Description</p>
+          </div>
+          <div class="col-12 pt0 p6 go-left">
+            <textarea v-model="update.data.description" type="text" placeholder="Input description"
+              class="input outline-dark desc"></textarea>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer border-top">
+        <button v-if="!isUpdating" @click="confirmUpdate" class="btn btn-light-info btn-xs go-right">
+          Confirm
+        </button>
+        <button v-else class="btn btn-light-info btn-xs go-right">
+          Loading...
+        </button>
+        <button @click="closeModal" class="btn btn-light-secondary btn-xs mr12 go-right">
+          Cancel
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

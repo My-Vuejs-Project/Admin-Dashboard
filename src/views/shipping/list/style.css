@@ -1,0 +1,285 @@
+a {
+  text-decoration: none;
+  line-height: 18px;
+}
+
+td.tr-left.video {
+  width: 80px;
+  height: auto;
+  position: relative;
+}
+
+.tr-left.video img {
+  width: 45px;
+  height: 30px;
+  -o-object-fit: cover;
+  object-fit: cover;
+}
+
+i.fas.fa-play {
+  border: 1px solid;
+  padding: 3px;
+  font-size: 5px;
+  border-radius: 50%;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+}
+
+.cover img {
+  width: 45px;
+  height: 45px;
+  -o-object-fit: cover;
+  object-fit: cover;
+}
+
+.table-name {
+  padding-left: 42px;
+}
+
+button.btn.btn-theme-grey-light.btn-xs {
+  margin: 0 5px;
+}
+
+.red {
+  color: red;
+}
+
+.green {
+  color: green;
+}
+
+.search-box {
+  min-width: 150px;
+  background-color: #fff;
+  padding: 6px;
+  height: 34px;
+  display: flex;
+  align-self: center;
+  margin-left: 20px;
+  border-radius: 4px;
+  border: 1px solid #ddd;
+}
+
+input#search {
+  outline-style: none;
+  border: none;
+  width: 100%;
+  margin-left: 8px;
+}
+
+.btn-create {
+  background-color: var(--dark);
+  color: #fff;
+  margin-right: 7px;
+  width: 170px;
+  font-weight: 600;
+  height: 32px;
+  border-radius: 4px;
+}
+
+.desc {
+  white-space: nowrap;
+  overflow: hidden;
+  max-width: 500px;
+  text-overflow: ellipsis;
+}
+
+input[type='date']::-webkit-inner-spin-button,
+input[type='date']::-webkit-calendar-picker-indicator {
+  margin: 0;
+}
+
+input[type='date'] {
+  width: 120px;
+  height: 30px;
+  border-radius: 4px;
+  border: 1px solid #ddd;
+  font-size: 11px;
+  padding-right: 3px;
+  margin: 0 6px;
+  color: #7e7e7e;
+  text-align: center;
+  -webkit-appearance: textfield;
+  -moz-appearance: textfield;
+  min-height: 30px;
+  background-color: #fff;
+}
+
+input[type='date']:focus {
+  outline: none;
+}
+
+.filter {
+  font-size: 12px;
+  display: flex;
+  -moz-text-align-last: right;
+  align-items: center;
+}
+
+.filter span {
+  font-weight: 600;
+}
+
+header.navbar.r-navbar.mobile {
+  display: none;
+}
+
+.con-search-btn.mobile {
+  display: none;
+}
+
+select#type {
+  outline: none;
+  margin-left: 4px;
+  color: var(--theme-secondary);
+  border: 1px solid #a5a5a5;
+  background: white;
+  padding: 2px;
+  border-radius: 4px;
+}
+
+.modal {
+  width: 560px;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  border-radius: 6px;
+  display: flex;
+  flex-direction: column;
+  margin: 30px auto;
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 999;
+}
+
+.modal img {
+  width: 70%;
+  margin: 0 auto;
+  background: transparent;
+}
+
+@media screen and (min-width: 1024px) {
+  .modal-lg.detial {
+    width: 1000px;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .modal-lg.detial {
+    width: 90%;
+  }
+}
+
+@media screen and (max-width: 920px) {
+  .search-box {
+    width: 250px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  header.navbar.r-navbar.mobile {
+    display: flex;
+    margin-top: 12px;
+    justify-content: flex-end;
+  }
+
+  .filter.mobile,
+  .search-box.mobile {
+    display: flex;
+  }
+
+  .btn-create {
+    width: 300px;
+  }
+
+  .filter-date {
+    display: flex;
+    align-items: center;
+  }
+
+  .desc {
+    max-width: 300px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  header.navbar.r-navbar.mobile {
+    display: block;
+  }
+
+  .con-search-btn {
+    display: none;
+  }
+
+  .con-search-btn.mobile {
+    display: flex;
+  }
+
+  .btn-create {
+    width: 100%;
+  }
+
+  .search-box.mobile {
+    width: 100%;
+    margin: 0 6px;
+  }
+
+  .filter.mobile {
+    margin-top: 12px;
+    margin: 12px 6px 0;
+    justify-content: space-between;
+  }
+
+  .filter-date {
+    width: 50%;
+  }
+
+  input#startDate,
+  input#endDate {
+    width: 100%;
+  }
+
+  input#endDate {
+    margin-right: 0;
+  }
+
+  .modal-md {
+    width: 85%;
+  }
+
+  .total {
+    display: block;
+    text-align: center;
+  }
+}
+
+@media screen and (max-width: 375px) {
+  .filter.mobile {
+    display: block;
+  }
+
+  .filter-date {
+    width: 100%;
+  }
+
+  .filter-date.start {
+    margin-bottom: 12px;
+  }
+
+  .filter-date span {
+    width: 33px;
+  }
+
+  input#startDate {
+    margin-right: 0;
+  }
+
+  .desc {
+    max-width: 150px;
+  }
+}

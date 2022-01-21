@@ -1,0 +1,107 @@
+.wrapper-container {
+    width: 100%;
+    min-height: 100vh;
+    position: relative;
+    padding: 72px 20px 20px 320px;
+}
+
+.margin-respon12 {
+    padding-top: 0px;
+}
+
+.text-responce {
+    right: 0px;
+    position: absolute;
+}
+
+.search-box {
+    background-color: #fff;
+    padding: 6px;
+    height: 34px;
+    display: flex;
+    align-self: center;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+}
+
+input#search {
+    outline-style: none;
+    border: none;
+    width: 100%;
+    margin-left: 8px;
+}
+
+.filter-type {
+    width: 175px;
+    padding: 6px;
+}
+
+.btn-create {
+    background-color: var(--dark);
+    color: #fff;
+    margin-right: 7px;
+    width: 170px;
+    font-weight: 600;
+    height: 32px;
+    border-radius: 4px;
+    font-size: 12px;
+}
+
+tr.hover-list {
+    height: 50px;
+}
+
+.search-username {
+    width: 200px;
+}
+
+.search-date {
+    width: 250px;
+    margin-right: 6px;
+}
+
+.btn-xs {
+    width: 72px;
+}
+
+@media screen and (max-width: 1360px) {
+    .search-box img {
+        width: 16px;
+    }
+
+    input#search {
+        margin-left: 4px;
+    }
+
+    .search-email {
+        width: 150px;
+    }
+
+    .search-username {
+        width: 120px;
+    }
+
+    .search-date {
+        width: 180px;
+    }
+
+    .filter-type {
+        width: 90px;
+    }
+
+    .btn-create {
+        width: 120px;
+    }
+}
+
+@media screen and (max-width: 860px) {
+    .search-email {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 640) {
+    .search-email {
+        display: none;
+    }
+}

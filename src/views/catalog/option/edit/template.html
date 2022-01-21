@@ -1,0 +1,82 @@
+<div class="row p6 radius6 animate-bottom">
+  <div class="row bg-white border-top-light-blue">
+    <div class="back pointer" title="Back" @click="goBack">
+      <i @click="goBack" class="fas fa-arrow-left pointer font24" title="Back"></i>
+    </div>
+    
+    <div class="container-wrap">
+      <div class="title">
+        Option Type
+      </div>
+
+      <div class="content">
+        <div class="split">
+          <div class="txt-title">
+            <span class="txt-danger" style="line-height: 31px;">*</span>
+            <span class="line-h31">Option Name :</span>
+          </div>
+
+          <div class="input-container">
+            <input
+              v-model="data.text"
+              type="text"
+              placeholder="input name..."
+            />
+          </div>
+        </div>
+
+        <div class="split mt35">
+          <div class="txt-title">
+            <span class="txt-danger" style="line-height: 31px;">*</span>
+            <span class="line-h31">Option Type :</span>
+          </div>
+
+          <select v-model="data.type" class="input-container">
+            <option :value="data.type" disabled>{{data.type}}</option>
+            <option
+              v-for="(type,index) in types"
+              :key="(type,index)"
+              :value="type.label"
+            >
+              {{type.label}}</option
+            >
+          </select>
+        </div>
+
+        <div class="split mt35">
+          <div class="txt-title">
+            <span class="txt-danger" style="line-height: 31px;">*</span>
+            <span class="line-h31">Sort order :</span>
+          </div>
+
+          <div class="input-container">
+            <input
+              v-model.number="data.sortOrder"
+              type="number"
+              placeholder="input order..."
+            />
+          </div>
+        </div>
+      </div>
+
+      <div
+        class="col-12 p6 mb12"
+        style="display: flex;justify-content: flex-end;"
+      >
+        <button @click="goBack" class="btn btn-light-secondary mr8">
+          Cancel
+        </button>
+        <button
+          v-if="!isUpdating"
+          @click="subminUpdateOption"
+          class="btn btn-light-info"
+        >
+          Update
+        </button>
+        <button v-else class="btn btn-light-info">Loading...</button>
+      </div>
+    </div>
+  </div>
+
+  <OptionValue :id="stringToNumber($route.query.id)"></OptionValue>
+</div>

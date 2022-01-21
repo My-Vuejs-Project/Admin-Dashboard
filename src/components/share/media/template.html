@@ -1,0 +1,209 @@
+<div>
+  <div class="modal-header">
+    <span>Select File</span>
+    <span class="btn-cancel mt-5 pointer" @click="closeMedia" title="Close">
+      <img :src="require('@/assets/images/cancel1.svg')" alt="" width="15px" />
+    </span>
+  </div>
+
+  <div class="row">
+    <div class="flex-row border-botttom">
+      <div
+        @click="tab('server')"
+        @change="getData"
+        :class="display.tab === 'server' ? 'active-tab' : ''"
+      >
+        <div class="p8 mr5 tab-hover ml7">
+          <p class="mb0">Choose From Server</p>
+        </div>
+      </div>
+
+      <div
+        @click="tab('computer')"
+        :class="display.tab === 'computer' ? 'active-tab' : ''"
+      >
+        <div class="p8 mr5 tab-hover">
+          <p class="mb0">Upload From Computer</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div
+    v-show="display.tab === 'server'"
+    class="modal-header txt-info"
+    style="max-height: 600px;overflow: auto;"
+  >
+    <div class="row ph16">
+      <div
+        v-if="data.mediaSelected && data.mediaSelected.length > 0"
+        class="row"
+        style="border: 1px solid #eaeaea;"
+      >
+        <div class="col-12 p12" style="background:#eaeaea; z-index: 9;">
+          <span>Image Selected</span>
+          <button
+            @click="submitMediaSelected"
+            class="btn btn-xs btn-info go-right"
+          >
+            Done
+          </button>
+          <button
+            @click="removeAllMediaSelected"
+            class="btn btn-xs btn-danger go-right mr6"
+          >
+            Clear
+          </button>
+        </div>
+        <div class="row p6">
+          <div
+            class="list-photo"
+            v-for="(mediaSelected, mediaSelectedIndex) in data.mediaSelected"
+            :key="(mediaSelected, mediaSelectedIndex)"
+          >
+            <div class="photo">
+              <div class="overlay-image">
+                <img
+                  @click="removeMediaSelected(mediaSelectedIndex)"
+                  :src="require('@/assets/images/cancel.svg')"
+                  alt=""
+                  title="remove"
+                  width="22px"
+                  class="image-cancel-right"
+                />
+              </div>
+              <img
+                :src="getFullImage(mediaSelected.url)"
+                alt=""
+                class="display-image"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row pv24 select-folder">
+      <span>Select Folder</span>
+      <select @change="filterDirectory" v-model="body.folder" class="outline-dark">
+        <option value="">All</option>
+        <option v-for="(director,index) in mediaDirectory" :key="(director,index)" :value="director.code">{{director.name}}
+        </option>
+      </select>
+    </div>
+
+    <div class="list-photo" v-for="(image, index) in data.media" :key="index">
+      <div class="photo">
+        <div class="overlay-image">
+          <div
+            @click="selectMedia(index)"
+            class="overlay-image"
+            title="select"
+          ></div>
+          <img
+            @click="deleteItem(index)"
+            :src="require('@/assets/images/cancel.svg')"
+            alt=""
+            title="remove"
+            width="22px"
+            class="image-cancel-right"
+          />
+        </div>
+        <img :src="getFullImage(image.url)" alt="" class="display-image" />
+      </div>
+    </div>
+
+    <label
+      v-show="!loading && data.pagination && data.pagination.total > 10 && data.pagination.limit < data.pagination.total "
+      @click="showMore"
+      class="btn btn-md row show-more"
+    >
+      Show more
+    </label>
+
+    <div v-show="loading" class="no-data">
+      <img :src="require('@/assets/images/loading1.gif')" alt="" width="80px" />
+    </div>
+
+    <div
+      v-show="!loading && data.pagination && data.pagination.total == 0 "
+      class="no-data"
+    >
+      <p>No Item !!</p>
+    </div>
+  </div>
+
+  <div v-show="display.tab === 'computer'" class="bg-white box-list-photo p20">
+    <div class=" pt16 ph16">
+      <div class="row mb12" style="border: 1px solid #eaeaea;">
+        <div class="col-12 p12 title" style="background:#eaeaea">
+          <span>Add New Media</span>
+
+          <select v-model="body.directory" class="outline-dark" id="select-directory">
+            <option disabled>Select Directory</option>
+            <option v-for="(director,index) in mediaDirectory" :key="(director,index)" :value="director.code">{{director.name}}
+            </option>
+          </select>
+        </div>
+        <div class="row p12">
+          <div
+            class="list-photo"
+            v-for="(media, index) in body.image.fileList"
+            :key="index"
+          >
+            <div class="photo">
+              <div class="overlay-image">
+                <img
+                  @click="removeItem(index)"
+                  :src="require('@/assets/images/cancel.svg')"
+                  alt=""
+                  title="remove"
+                  width="22px"
+                  class="image-cancel-right"
+                />
+              </div>
+              <img
+                :src="media ? fileToPath(media) : require('@/assets/images/noImage.jpg')"
+                class="display-image"
+              />
+            </div>
+          </div>
+
+          <label
+            class="p6 border pointer mt5"
+            :for="'chooseImage'"
+            id="image"
+            style="display: inline-block;"
+          >
+            <img
+              :src="require('@/assets/images/addImage.jpg')"
+              style="width: 80px;height:80px;object-fit: cover;"
+            />
+          </label>
+
+          <input
+            @change="chooseImage($event)"
+            hidden
+            type="file"
+            :id="'chooseImage'"
+            :ref="'chooseImage'"
+            accept="image/*, video/*"
+            multiple
+          />
+        </div>
+        <div class="col-12 p12 flex-row" style="border-top:1px solid #eaeaea">
+          <button
+            @click="submitFiles"
+            v-if="!uploading"
+            class="btn btn-light-info btn-md go-right"
+          >
+            Submit
+          </button>
+          <button v-else class="btn btn-light-info btn-md go-right">
+            Uploading...
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

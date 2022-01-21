@@ -1,0 +1,88 @@
+<div class="row p6 radius6 animate-bottom">
+  <div class="row bg-white border-top-light-blue">
+    <div class="container-wrap">
+      <div class="title">
+        Zone To Geo Zone
+      </div>
+
+      <TableLoading v-if="isFetching" />
+      <div class="content" v-if="!isFetching">
+        
+        <div class="split mt35">
+          <div class="txt-title">
+            <span class="txt-danger" style="line-height: 31px;">*</span>
+            <span class="line-h31">Country :</span>
+          </div>
+          <multiselect 
+          v-model="models.country" 
+          placeholder="Search" 
+          label="name" 
+          track-by="id"
+          :options="data.country" 
+          :multiple="false" 
+          :taggable="false"
+          @select = "getProvince()"
+          style="height: 36px;"></multiselect>
+        </div>
+
+        <div class="split mt35">
+          <div class="txt-title">
+            <span class="txt-danger" style="line-height: 31px;">*</span>
+            <span class="line-h31">Province :</span>
+          </div>
+          <multiselect 
+          v-model="models.province" 
+          placeholder="Search" 
+          label="name" track-by="id"
+          :options="data.province" 
+          :multiple="false" 
+          :taggable="false" 
+          @select = "getDistrict()"
+          style="height: 36px;"></multiselect>
+        </div>
+
+        <div class="split mt35">
+          <div class="txt-title">
+            <span class="txt-danger" style="line-height: 31px;">*</span>
+            <span class="line-h31">District :</span>
+          </div>
+          <multiselect 
+          v-model="models.district" 
+          placeholder="Search" 
+          label="name" track-by="id"
+          :options="data.district" 
+          :multiple="false" 
+          :taggable="false"
+          style="height: 36px;"></multiselect>
+        </div>
+
+        <div class="split mt35">
+          <div class="txt-title">
+            <span class="txt-danger" style="line-height: 31px;">*</span>
+            <span class="line-h31">Geo Zone :</span>
+          </div>
+          <multiselect 
+          v-model="models.geoZone" 
+          placeholder="Search" 
+          label="name" 
+          track-by="id"
+          :options="data.geoZone" 
+          :multiple="false" 
+          :taggable="false" style="height: 36px;"></multiselect>
+
+        </div>
+
+      </div>
+
+      <div class="col-12 p6 mb12" style="display: flex;justify-content: flex-end;">
+        <button @click="goBack" class="btn btn-light-secondary mr8">
+          Cancel
+        </button>
+        <button v-if="!isCreating" @click="subminCreateZoneToGeoZone" class="btn btn-light-info">
+          Create
+        </button>
+        <button v-else class="btn btn-light-info">Loading...</button>
+      </div>
+    </div>
+  </div>
+</div>

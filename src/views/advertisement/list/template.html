@@ -1,0 +1,129 @@
+<div class="row">
+  <div class="row p6 radius6 animate-bottom">
+    <div class="row p12 bg-white border-top-light-blue">
+      <header class="navbar r-navbar">
+        <div class="ul-xl">
+          <div class="ul-xl-li">
+            Advertisement
+          </div>
+        </div>
+
+        <div class="con-search-btn" style="position: unset;">
+          <div class="filter">
+            <select v-model="data.defaultType" class="input input-xs mr6" style="width: 200px;padding: 6px;">
+              <option value="" class="option-all">All Type</option>
+              <option value="banner">Banner</option>
+              <option value="splashscreen">Splash Screen</option>
+            </select>
+            <select v-model="data.defaultStatus" class="input input-xs mr6" style="width: 120px;padding: 6px;">
+              <option value="" class="option-all">All Status</option>
+              <option value="active">Active</option>
+              <option value="inactive">Inactive</option>
+            </select>
+          </div>
+
+          <button @click="searchAdvertisement" class="btn btn-theme-grey-light btn-create">
+            Search
+          </button>
+
+          <router-link v-if="checkoutPermission('CREATE_ADVERTISEMENT')" :to="{name : 'CreateAdvertisement'}"
+            class="btn btn-theme-grey-light btn-create font13" style="margin-right: 0; width: 200px;">
+            + Create Advertisement
+          </router-link>
+        </div>
+      </header>
+
+      <div class="table-control p12">
+        <table class="table wh800" cellspacing="0">
+          <thead>
+            <tr>
+              <th>No</th>
+              <th>Image</th>
+              <th>Type</th>
+              <th>Status</th>
+              <th width="100px">Sort Order</th>
+              <th v-if="checkoutPermission('UPDATE_ADVERTISEMENT') || checkoutPermission('DELETE_ADVERTISEMENT')"
+                style="text-align: center;width: 100px;">Action</th>
+            </tr>
+          </thead>
+          <tbody v-if="!isFetching && checkoutPermission('LIST_ADVERTISEMENT')">
+            <tr v-for="(advertisement,advertisementIndex) in data.advertisements"
+              :key="(advertisement,advertisementIndex)" class="hover-list">
+              <td>{{advertisementIndex+1}}</td>
+              <td>
+                <img v-if="advertisement.imageUrl" :src="getFullImage(advertisement.imageUrl)" alt="" style="height: 40px;" />
+                <img v-else :src="require('@/assets/images/noImage.jpg')" alt="No Image" style="height: 40px;" />
+              </td>
+              <td>
+                <span v-if="advertisement.type == 'banner'">Banner</span>
+                <span v-else>Splash Screen</span>
+              </td>
+              <td>
+                <span v-if="advertisement.status == 'active'" class="txt-success">Active</span>
+                <span v-else class="txt-danger">Inactive</span>
+              </td>
+              <td class="txt-center">{{advertisement.sortOrder}}</td>
+              <td class="tr-right">
+                <!-- <button @click="popupModal('update', advertisementIndex)" class="btn btn-light-info btn-xs mr5">
+                  Update
+                </button> -->
+                <router-link v-if="checkoutPermission('UPDATE_ADVERTISEMENT')" :to="{name : 'EditAdvertisement', query: {id: advertisement.id}}"
+                  class="btn btn-light-info btn-xs mr5">
+                  Update
+                </router-link>
+                <button v-if="checkoutPermission('DELETE_ADVERTISEMENT')" @click="popupModal('delete',advertisementIndex)" class="btn btn-light-dark btn-xs">
+                  Delete
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <TableLoading v-if="isFetching" />
+        <NoItem v-if="isNoData" />
+      </div>
+      <div class="total ph12">
+        <div class="ul-xl-li go-left">
+          Total : {{data.pagination.total}}
+        </div>
+        <Pagination v-if="data.pagination.totalPage > 0" :pagination="data.pagination.totalPage" />
+      </div>
+    </div>
+  </div>
+
+  <div v-if="display.modal.delete.show" class="overlay">
+    <div @click="closeModal" class="overlay"></div>
+    <div class="modal-md">
+      <div class="modal-header border-bottom txt-info">
+        <span class="txt-sm">Delete</span>
+      </div>
+      <div class="modal-body" style="overflow-y: hidden; padding: 16px;">
+        <span>Do you want to delete this record?</span>
+      </div>
+      <div class="modal-footer border-top">
+        <button v-if="!isDeleting" @click="deleteAdvertise" class="btn btn-light-info btn-xs go-right">
+          Yes
+        </button>
+        <button v-else class="btn btn-light-info btn-xs go-right">
+          Loading...
+        </button>
+        <button @click="closeModal" class="btn btn-light-secondary btn-xs mr12 go-right">
+          No
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div v-if="display.modal.large" class="overlay">
+    <div @click="closeModal" class="overlay"></div>
+    <div class="modal-lg detial">
+      <div class="modal-header border-bottom txt-info">
+        <span class="txt-md">Advertisement Information</span>
+        <span style="position: absolute;right: 14px;" class="pointer" title="close" @click="closeModal">
+          <img :src="require('@/assets/images/cancel1.svg')" alt="" width="15px" />
+        </span>
+      </div>
+
+      <Update :detail.sync="data.detail" @clicked="updated"></Update>
+    </div>
+  </div>
+</div>
