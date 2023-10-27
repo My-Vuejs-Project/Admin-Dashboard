@@ -17,7 +17,7 @@ import 'vue2-timepicker/dist/VueTimepicker.css'
 import * as VueGoogleMaps from "vue2-google-maps" // Import package
 Vue.use(VueGoogleMaps, {
   load: {
-    key: "AIzaSyAoICXqGkchKOAwsgZePC1D36JQmhcybHA",
+    key: "KEY",
     libraries: "places"
   }
 });
